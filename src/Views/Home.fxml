@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Home">
+   <children>
+      <Button fx:id="addCustomer" layoutX="157.0" layoutY="93.0" mnemonicParsing="false" onAction="#addCustomerClicked" text="Add Customer" />
+      <Button fx:id="updateCustomer" layoutX="140.0" layoutY="137.0" mnemonicParsing="false" onAction="#updateCustomerClicked" text="Update Customer" />
+      <Button fx:id="deleteCustomer" layoutX="143.0" layoutY="175.0" mnemonicParsing="false" onAction="#deleteCustomerClicked" text="Delete Customer" />
+      <Button fx:id="addAppointment" layoutX="334.0" layoutY="93.0" mnemonicParsing="false" onAction="#addAppointmentClicked" text="Add Appointment" />
+      <Button fx:id="updateAppointment" layoutX="334.0" layoutY="137.0" mnemonicParsing="false" onAction="#updateAppointmentClicked" text="Update Appointment" />
+      <Button fx:id="deleteAppointment" layoutX="334.0" layoutY="175.0" mnemonicParsing="false" onAction="#deleteAppointmentClicked" text="Delete Appointment" />
+   </children>
+</AnchorPane>
