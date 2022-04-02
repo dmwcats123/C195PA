@@ -10,8 +10,8 @@ public class User {
     private String lastUpdatedBy;
 
 
-    User(){}
-    User(int userID, String username, String password, String createDate, String createdBy, String lastUpdate, String lastUpdatedBy) {
+    public User(){}
+    public User(int userID, String username, String password, String createDate, String createdBy, String lastUpdate, String lastUpdatedBy) {
         this.userID=userID;
         this.username = username;
         this.password = password;

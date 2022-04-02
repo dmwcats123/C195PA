@@ -1,5 +1,6 @@
 package Controllers;
 
+import DAO.UserDao;
 import Models.Database;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -12,7 +13,6 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.ZoneId;
 import java.util.Locale;
@@ -53,31 +53,24 @@ public class Main extends Application implements Initializable {
 
     @FXML
     public void submitClicked() throws Exception {
-        Database database = new Database();
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
         String attemptedUsername = usernameField.getText();
         String attemptedPassword = passwordField.getText();
-        ResultSet result = statement.executeQuery("select * from users");
-        boolean matchFound = false;
-        while(result.next()) {
-            if (attemptedUsername.equals(result.getString("User_Name")) && attemptedPassword.equals(result.getString("Password"))) {
-                matchFound = true;
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/Home.fxml"));
-                Parent root1 = fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root1));
-                stage.show();
-            }
-        }
-        if (!matchFound) {
+        if(UserDao.get(attemptedUsername) != null && UserDao.get(attemptedUsername).getPassword().equals(attemptedPassword)) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/Home.fxml"));
+            Parent root1 = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             ResourceBundle resourceBundle = ResourceBundle.getBundle("Resources/login", userLocale);
             alert.setHeaderText(resourceBundle.getString("loginProblemAlertTitle"));
             alert.setContentText(resourceBundle.getString("loginProblemAlertText"));
             Optional<ButtonType> info = alert.showAndWait();
         }
-        database.closeConnection();
+        Database.closeConnection();
     }
 }
 
