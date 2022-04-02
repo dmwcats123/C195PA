@@ -76,15 +76,14 @@ public class UserDao {
 
     public static void add(User user) throws Exception {
         Connection connection = Database.makeConnection();
-        PreparedStatement ps = connection.prepareStatement("insert into users (User_ID, User_Name, Password, Create_Date, Created_By," +
+        PreparedStatement ps = connection.prepareStatement("insert into users (User_Name, Password, Create_Date, Created_By," +
                 " Last_Update, Last_Updated_By) VALUES (?,?,?,?,?,?,?)");
-        ps.setInt(1, user.getUserID());
-        ps.setString(2, user.getUsername());
-        ps.setString(3, user.getPassword());
-        ps.setString(4, user.getCreateDate());
-        ps.setString(5, user.getCreatedBy());
-        ps.setString(6, user.getLastUpdate());
-        ps.setString(7, user.getLastUpdatedBy());
+        ps.setString(1, user.getUsername());
+        ps.setString(2, user.getPassword());
+        ps.setString(3, user.getCreateDate());
+        ps.setString(4, user.getCreatedBy());
+        ps.setString(5, user.getLastUpdate());
+        ps.setString(6, user.getLastUpdatedBy());
 
         ps.executeUpdate();
     }

@@ -12,9 +12,9 @@ public class Customer {
     private String lastUpdatedBy;
     private int divisionID;
 
-    Customer() {}
+    public Customer() {}
 
-    Customer(int customerID, String customerName, String customerAddress, String customerPostalCode, String customerPhone, String createDate,
+    public Customer(int customerID, String customerName, String customerAddress, String customerPostalCode, String customerPhone, String createDate,
              String createdBy, String lastUpdate, String lastUpdatedBy, int divisionID) {}
 
     public void setCreateDate(String createDate) {
