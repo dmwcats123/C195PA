@@ -12,7 +12,7 @@ public class CustomerDao {
     public static Customer get(int customerID) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
-        String sqlStatement= "select * FROM users WHERE user_ID  = " + customerID;
+        String sqlStatement= "select * FROM customers WHERE customer_ID  = " + customerID;
         ResultSet result = statement.executeQuery(sqlStatement);
         Customer customerResult = new Customer();
         while (result.next()) {
@@ -32,7 +32,7 @@ public class CustomerDao {
         return null;
     }
 
-    public static ObservableList<Customer> getAllUsers() throws SQLException, Exception{
+    public static ObservableList<Customer> getAllCustomers() throws SQLException, Exception{
         ObservableList<Customer> allCustomers= FXCollections.observableArrayList();
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
@@ -50,10 +50,10 @@ public class CustomerDao {
         return allCustomers;
     }
 
-    public static void delete(int userID) throws Exception {
+    public static void delete(int customerID) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
-        String sqlStatement= "delete * FROM users where User_ID = " + userID;
+        String sqlStatement= "delete * FROM customers where Customer_ID = " + customerID;
         statement.executeUpdate(sqlStatement);
     }
 
@@ -75,8 +75,8 @@ public class CustomerDao {
 
     public static void update(Customer customer) throws Exception {
         Connection connection = Database.makeConnection();
-        PreparedStatement ps = connection.prepareStatement("update user SET Customer_Name, Customer_Address, " +
-                "Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By) VALUES (?,?,?,?,?,?,?,?)");
+        PreparedStatement ps = connection.prepareStatement("update customers SET Customer_Name = ?, Customer_Address = ?, " +
+                "Postal_Code = ?, Phone = ?, Create_Date = ?, Created_By = ?, Last_Update = ?, Last_Updated_By = ? WHERE Customer_ID = ?");
 
         ps.setString(1, customer.getCustomerName());
         ps.setString(2, customer.getCustomerAddress());
@@ -86,6 +86,8 @@ public class CustomerDao {
         ps.setString(6, customer.getCreatedBy());
         ps.setString(7, customer.getLastUpdate());
         ps.setString(8, customer.getLastUpdatedBy());
+        ps.setInt(9, customer.getCustomerID());
+
         ps.executeUpdate();
         Database.closeConnection();
     }

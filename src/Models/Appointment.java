@@ -18,9 +18,9 @@ public class Appointment {
     private int contactID;
 
 
-    Appointment(){}
+    public Appointment(){}
 
-    Appointment(int appointmentID, String title, String description, String location,
+    public Appointment(int appointmentID, String title, String description, String location,
                             String type, String start, String end, String createdBy, String CreateDate,
                             String lastUpdate, String lastUpdatedBy, int customerID, int userID, int contactID) {
         this.appointmentID = appointmentID;

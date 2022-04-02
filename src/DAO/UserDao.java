@@ -90,14 +90,16 @@ public class UserDao {
 
     public static void update(User user) throws Exception {
         Connection connection = Database.makeConnection();
-        PreparedStatement ps = connection.prepareStatement("update user SET User_Name = ?, Password = ?, Create_Date = ?, Created_By = ?," +
-                " Last_Update = ?, Last_Updated_By = ?) VALUES (?,?,?,?,?,?)");
+        PreparedStatement ps = connection.prepareStatement("update users SET User_Name = ?, Password = ?, Create_Date = ?, Created_By = ?," +
+                " Last_Update = ?, Last_Updated_By = ? WHERE User_ID = ?");
         ps.setString(1, user.getUsername());
         ps.setString(2, user.getPassword());
         ps.setString(3, user.getCreateDate());
         ps.setString(4, user.getCreatedBy());
         ps.setString(5, user.getLastUpdate());
         ps.setString(6, user.getLastUpdatedBy());
+        ps.setInt(7, user.getUserID());
+
 
         ps.executeUpdate();
         Database.closeConnection();
