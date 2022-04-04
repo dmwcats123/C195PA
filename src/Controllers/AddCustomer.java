@@ -35,6 +35,8 @@ public class AddCustomer {
         newCustomer.setCustomerPostalCode(postalCodeField.getText());
         newCustomer.setCustomerPhone(phoneNumberField.getText());
         newCustomer.setCreateDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+        newCustomer.setCreatedBy(Main.currentUser.getUsername());
+        newCustomer.setLastUpdatedBy(Main.currentUser.getUsername());
         newCustomer.setDivisionID(FldDAO.get(fldCombo.getSelectionModel().toString()).getDivisionID()); // need to implement fldDAO with a get method given string, in order to get the division ID.
     }
 
@@ -69,13 +71,14 @@ public class AddCustomer {
             ResultSet result = statement.executeQuery();
             result.next();
             String country_ID = result.getString("Country_ID");
-            PreparedStatement divisionStatement =  connection.prepareStatement("SELECT Division FROM 'first-level divisions' WHERE Country_ID = ?");
+            PreparedStatement divisionStatement =  connection.prepareStatement("SELECT Division FROM first_level_divisions WHERE Country_ID = ?");
             divisionStatement.setObject(1, country_ID);
-            result = divisionStatement.executeQuery();
-            while (result.next()) {
-                fld.add(result.getString("Division"));
+            ResultSet divisionResult = divisionStatement.executeQuery();
+            divisionResult = divisionStatement.executeQuery();
+            while (divisionResult.next()) {
+                fld.add(divisionResult.getString("Division"));
             }
-            countryCombo.setItems(fld);
+            fldCombo.setItems(fld);
         } catch (Exception e) {
             System.out.println("Exception " + e);
         }

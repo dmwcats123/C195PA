@@ -2,6 +2,7 @@ package Controllers;
 
 import DAO.UserDao;
 import Models.Database;
+import Models.User;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,7 @@ public class Main extends Application implements Initializable {
     @FXML TextField passwordField;
     @FXML Button submit;
     @FXML Label zoneId;
+    public static User currentUser = new User();
     Locale userLocale = Locale.getDefault();
     private ZoneId userZoneId = ZoneId.systemDefault();;
 
@@ -63,6 +65,7 @@ public class Main extends Application implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.show();
+            currentUser = UserDao.get(attemptedUsername);
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             ResourceBundle resourceBundle = ResourceBundle.getBundle("Resources/login", userLocale);
