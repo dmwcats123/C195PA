@@ -21,9 +21,9 @@ public class CustomerDao {
             customerResult.setCustomerAddress(result.getString("Address"));
             customerResult.setCustomerPostalCode(result.getString("Postal_Code"));
             customerResult.setCustomerPhone(result.getString("Phone"));
-            customerResult.setCreateDate(result.getString("Create_Date"));
+            customerResult.setCreateDate(result.getDate("Create_Date"));
             customerResult.setCreatedBy(result.getString("Created_By"));
-            customerResult.setLastUpdate(result.getString("Last_Update"));
+            customerResult.setLastUpdate(result.getDate("Last_Update"));
             customerResult.setLastUpdatedBy(result.getString("Last_Updated_By"));
             customerResult.setDivisionID(result.getInt("Division_ID"));
             return customerResult;
@@ -65,9 +65,9 @@ public class CustomerDao {
         ps.setString(2, customer.getCustomerAddress());
         ps.setString(3, customer.getCustomerPostalCode());
         ps.setString(4, customer.getCustomerPhone());
-        ps.setString(5, customer.getCreateDate());
+        ps.setDate(5, customer.getCreateDate());
         ps.setString(6, customer.getCreatedBy());
-        ps.setString(7, customer.getLastUpdate());
+        ps.setDate(7, customer.getLastUpdate());
         ps.setString(8, customer.getLastUpdatedBy());
 
         ps.executeUpdate();
@@ -82,9 +82,9 @@ public class CustomerDao {
         ps.setString(2, customer.getCustomerAddress());
         ps.setString(3, customer.getCustomerPostalCode());
         ps.setString(4, customer.getCustomerPhone());
-        ps.setString(5, customer.getCreateDate());
+        ps.setDate(5, customer.getCreateDate());
         ps.setString(6, customer.getCreatedBy());
-        ps.setString(7, customer.getLastUpdate());
+        ps.setDate(7, customer.getLastUpdate());
         ps.setString(8, customer.getLastUpdatedBy());
         ps.setInt(9, customer.getCustomerID());
 

@@ -9,8 +9,8 @@ public class FirstLevelDivision {
     private String lastUpdatedBy;
     private int countryID;
 
-    FirstLevelDivision() {}
-    FirstLevelDivision(int divisionID, String division, String createDate, String createdBy, String lastUpdate,
+    public FirstLevelDivision() {}
+    public FirstLevelDivision(int divisionID, String division, String createDate, String createdBy, String lastUpdate,
                        String lastUpdatedBy, int countryID) {
         this.divisionID =divisionID;
         this.division = division;

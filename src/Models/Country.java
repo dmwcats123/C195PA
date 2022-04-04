@@ -1,15 +1,18 @@
 package Models;
 
+
+import java.sql.Date;
+
 public class Country {
     private int countryID;
     private String country;
-    private String createDate;
+    private Date createDate;
     private String createdBy;
-    private String lastUpdate;
+    private Date lastUpdate;
     private String lastUpdatedBy;
 
     Country() {}
-    Country(int countryID, String country, String createDate, String createdBy, String lastUpdate, String lastUpdatedBy) {
+    Country(int countryID, String country, Date createDate, String createdBy, Date lastUpdate, String lastUpdatedBy) {
         this.countryID = countryID;
         this.country = country;
         this.createDate = createDate;
@@ -22,7 +25,7 @@ public class Country {
         return lastUpdatedBy;
     }
 
-    public String getLastUpdate() {
+    public Date getLastUpdate() {
         return lastUpdate;
     }
 
@@ -30,7 +33,7 @@ public class Country {
         return createdBy;
     }
 
-    public String getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
@@ -46,7 +49,7 @@ public class Country {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
-    public void setLastUpdate(String lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
@@ -54,7 +57,7 @@ public class Country {
         this.createdBy = createdBy;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
