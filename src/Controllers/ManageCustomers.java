@@ -62,7 +62,22 @@ public class ManageCustomers {
 
     @FXML
     public void updateCustomerClicked() {
-
+        try {
+            Customer customerToUpdate = customerTableView.getSelectionModel().getSelectedItem();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/UpdateCustomer.fxml"));
+            Parent root1 = fxmlLoader.load();
+            Stage stage = new Stage();
+            UpdateCustomer updateCustomerController = fxmlLoader.getController();
+            updateCustomerController.initialize(customerToUpdate);
+            stage.setScene(new Scene(root1));
+            stage.show();
+            Stage currentStage= (Stage) customerTableView.getScene().getWindow();
+            currentStage.close();
+        } catch (java.io.IOException exception) {
+            System.out.println("io exception");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

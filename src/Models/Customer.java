@@ -1,5 +1,6 @@
 package Models;
 
+import DAO.CountryDao;
 import DAO.FldDAO;
 
 public class Customer {
@@ -112,6 +113,9 @@ public class Customer {
 
     public String getDivision() throws Exception {
         return FldDAO.get(this.divisionID).getDivision();
+    }
 
+    public String getCountry() throws Exception {
+        return CountryDao.get(FldDAO.get(this.divisionID).getCountryID()).getCountry();
     }
 }
