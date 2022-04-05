@@ -1,12 +1,12 @@
 package DAO;
 
+import Helpers.TimeUtility;
 import Models.Customer;
 import Models.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
-import java.time.Instant;
 
 public class CustomerDao {
 
@@ -66,13 +66,14 @@ public class CustomerDao {
         ps.setString(2, customer.getCustomerAddress());
         ps.setString(3, customer.getCustomerPostalCode());
         ps.setString(4, customer.getCustomerPhone());
-        ps.setTimestamp(5, Timestamp.from(Instant.now()));
+        ps.setString(5, TimeUtility.getCurrentUTCTimestamp());
         ps.setString(6, customer.getCreatedBy());
-        ps.setTimestamp(7, Timestamp.from(Instant.now()));
+        ps.setString(7, TimeUtility.getCurrentUTCTimestamp());
         ps.setString(8, customer.getLastUpdatedBy());
         ps.setInt(9,customer.getDivisionID());
 
         ps.executeUpdate();
+        Database.closeConnection();
     }
 
     public static void update(Customer customer) throws Exception {
@@ -86,7 +87,7 @@ public class CustomerDao {
         ps.setString(4, customer.getCustomerPhone());
         ps.setString(5, customer.getCreateDate());
         ps.setString(6, customer.getCreatedBy());
-        ps.setString(7, customer.getLastUpdate());
+        ps.setString(7, TimeUtility.getCurrentUTCTimestamp());
         ps.setString(8, customer.getLastUpdatedBy());
         ps.setInt(9, customer.getCustomerID());
 

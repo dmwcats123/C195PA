@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ManageCustomers">
+   <children>
+      <Button fx:id="addCustomer" layoutX="93.0" layoutY="29.0" mnemonicParsing="false" onAction="#addCustomerClicked" text="Add Customer" />
+      <Button fx:id="updateCustomer" layoutX="198.0" layoutY="29.0" mnemonicParsing="false" onAction="#updateCustomerClicked" text="Update Selected Customer" />
+      <Button fx:id="deleteCustomer" layoutX="369.0" layoutY="29.0" mnemonicParsing="false" onAction="#deleteCustomerClicked" text="Delete Selected Customer" />
+      <TableView layoutY="94.0" prefHeight="709.0" prefWidth="1200.0">
+        <columns>
+          <TableColumn fx:id="customerIDCol" prefWidth="120.0" text="ID" />
+          <TableColumn fx:id="customerNameCol" prefWidth="120.0" text="Name" />
+            <TableColumn fx:id="customerAddressCol" prefWidth="120.0" text="Address" />
+            <TableColumn fx:id="customerPostalCodeCol" prefWidth="120.0" text="Postal Code" />
+            <TableColumn fx:id="customerPhoneCol" prefWidth="120.0" text="Phone" />
+            <TableColumn fx:id="customerCreateDateCol" prefWidth="120.0" text="Create Date" />
+            <TableColumn fx:id="customerCreatedByCol" prefWidth="120.0" text="Created By" />
+            <TableColumn fx:id="customerLastUpdateCol" prefWidth="120.0" text="Last Update" />
+            <TableColumn fx:id="customerLastUpdatedByCol" prefWidth="120.0" text="Last Updated By" />
+            <TableColumn fx:id="customerFirstLevelDivisionCol" prefWidth="120.0" text="First Level Division" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
