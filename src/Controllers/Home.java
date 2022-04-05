@@ -9,9 +9,9 @@ import javafx.stage.Stage;
 public class Home {
 
     @FXML
-    public void addCustomerClicked() {
+    public void manageCustomersClicked() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/AddCustomer.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/ManageCustomers.fxml"));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -23,22 +23,7 @@ public class Home {
     }
 
     @FXML
-    public void updateCustomerClicked() {
+    public void manageAppointmentsClicked() {
     }
 
-    @FXML
-    public void deleteCustomerClicked() {
-    }
-
-    @FXML
-    public void addAppointmentClicked() {
-    }
-
-    @FXML
-    public void deleteAppointmentClicked() {
-    }
-
-    @FXML
-    public void updateAppointmentClicked() {
-    }
 }
