@@ -1,5 +1,6 @@
 package DAO;
 
+import Helpers.TimeUtility;
 import Models.Customer;
 import Models.Database;
 import javafx.collections.FXCollections;
@@ -41,8 +42,8 @@ public class CustomerDao {
         while(result.next()){
             Customer customerResult= new Customer(result.getInt("Customer_ID"), result.getString("Customer_Name"),
                     result.getString("Address"), result.getString("Postal_Code"), result.getString("Phone"),
-                    result.getString("Create_Date"), result.getString("Created_By"),
-                    result.getString("Last_Update"), result.getString("Last_Updated_By"), result.getInt("Division_ID"));
+                    TimeUtility.utcToLocalTime(result.getString("Create_Date")), result.getString("Created_By"),
+                    TimeUtility.utcToLocalTime(result.getString("Last_Update")), result.getString("Last_Updated_By"), result.getInt("Division_ID"));
             allCustomers.add(customerResult);
 
         }

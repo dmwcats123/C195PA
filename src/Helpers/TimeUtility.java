@@ -15,4 +15,11 @@ public class TimeUtility {
         ZonedDateTime utczdt = zdt.withZoneSameInstant(ZoneId.of("UTC"));
         return utczdt.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
+
+    public static String utcToLocalTime(String time) {
+        LocalDateTime ldt = LocalDateTime.parse(time, DateTimeFormatter.ofPattern(DATE_FORMAT));
+        ZonedDateTime utczdt = ldt.atZone(ZoneId.of("UTC"));
+        ZonedDateTime zdt = utczdt.withZoneSameInstant(ZoneId.systemDefault());
+        return zdt.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+    }
 }

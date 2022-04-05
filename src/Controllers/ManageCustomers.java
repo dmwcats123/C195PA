@@ -43,6 +43,7 @@ public class ManageCustomers {
             System.out.println(e);
         }
     }
+
     @FXML
     public void addCustomerClicked() {
         try {
