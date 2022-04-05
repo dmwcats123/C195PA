@@ -15,7 +15,7 @@ public class FldDAO {
     public static FirstLevelDivision get(int fldDao) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
-        String sqlStatement= "select * FROM first_level_divsions WHERE  Division_ID = " + fldDao;
+        String sqlStatement= "select * FROM first_level_divisions WHERE  Division_ID = " + fldDao;
         ResultSet result = statement.executeQuery(sqlStatement);
         FirstLevelDivision fldResult = new FirstLevelDivision();
         while (result.next()) {

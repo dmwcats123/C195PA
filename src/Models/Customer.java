@@ -1,5 +1,7 @@
 package Models;
 
+import DAO.FldDAO;
+
 public class Customer {
     private int customerID;
     private String customerName;
@@ -15,7 +17,18 @@ public class Customer {
     public Customer() {}
 
     public Customer(int customerID, String customerName, String customerAddress, String customerPostalCode, String customerPhone, String createDate,
-             String createdBy, String lastUpdate, String lastUpdatedBy, int divisionID) {}
+             String createdBy, String lastUpdate, String lastUpdatedBy, int divisionID) {
+        this.customerID = customerID;
+        this.customerName = customerName;
+        this.customerAddress = customerAddress;
+        this.customerPostalCode = customerPostalCode;
+        this.customerPhone = customerPhone;
+        this.createDate = createDate;
+        this.createdBy = createdBy;
+        this.lastUpdate = lastUpdate;
+        this.lastUpdatedBy = lastUpdatedBy;
+        this.divisionID = divisionID;
+    }
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
@@ -95,5 +108,10 @@ public class Customer {
 
     public String getCustomerPostalCode() {
         return customerPostalCode;
+    }
+
+    public String getDivision() throws Exception {
+        return FldDAO.get(this.divisionID).getDivision();
+
     }
 }
