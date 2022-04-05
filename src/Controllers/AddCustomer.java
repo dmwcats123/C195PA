@@ -1,6 +1,8 @@
 package Controllers;
 
+import DAO.CustomerDao;
 import DAO.FldDAO;
+import Helpers.TimeUtility;
 import Models.Customer;
 import Models.Database;
 import javafx.collections.FXCollections;
@@ -8,12 +10,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Calendar;
 
 public class AddCustomer {
     @FXML ComboBox<String> countryCombo;
@@ -22,8 +24,6 @@ public class AddCustomer {
     @FXML TextField postalCodeField;
     @FXML TextField phoneNumberField;
     @FXML ComboBox<String> fldCombo;
-
-
     public void initialize() {
         fillCountryComboBox();
     }
@@ -34,10 +34,14 @@ public class AddCustomer {
         newCustomer.setCustomerAddress(addressField.getText());
         newCustomer.setCustomerPostalCode(postalCodeField.getText());
         newCustomer.setCustomerPhone(phoneNumberField.getText());
-        newCustomer.setCreateDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+        newCustomer.setCreateDate(TimeUtility.getCurrentUTCTimestamp());
         newCustomer.setCreatedBy(Main.currentUser.getUsername());
+        newCustomer.setLastUpdate(TimeUtility.getCurrentUTCTimestamp());
         newCustomer.setLastUpdatedBy(Main.currentUser.getUsername());
-        newCustomer.setDivisionID(FldDAO.get(fldCombo.getSelectionModel().toString()).getDivisionID()); // need to implement fldDAO with a get method given string, in order to get the division ID.
+        newCustomer.setDivisionID(FldDAO.get(fldCombo.getSelectionModel().getSelectedItem()).getDivisionID());
+        CustomerDao.add(newCustomer);
+        Stage currentStage= (Stage) fldCombo.getScene().getWindow();
+        currentStage.close();
     }
 
     @FXML public void countryComboClicked() {

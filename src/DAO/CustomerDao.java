@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.time.Instant;
 
 public class CustomerDao {
 
@@ -21,9 +22,9 @@ public class CustomerDao {
             customerResult.setCustomerAddress(result.getString("Address"));
             customerResult.setCustomerPostalCode(result.getString("Postal_Code"));
             customerResult.setCustomerPhone(result.getString("Phone"));
-            customerResult.setCreateDate(result.getDate("Create_Date"));
+            customerResult.setCreateDate(result.getString("Create_Date"));
             customerResult.setCreatedBy(result.getString("Created_By"));
-            customerResult.setLastUpdate(result.getDate("Last_Update"));
+            customerResult.setLastUpdate(result.getString("Last_Update"));
             customerResult.setLastUpdatedBy(result.getString("Last_Updated_By"));
             customerResult.setDivisionID(result.getInt("Division_ID"));
             return customerResult;
@@ -59,16 +60,17 @@ public class CustomerDao {
 
     public static void add(Customer customer) throws Exception {
         Connection connection = Database.makeConnection();
-        PreparedStatement ps = connection.prepareStatement("insert into customers (Customer_ID, Customer_Name, Address, Postal_Code," +
-                "Phone, Create_Date, Created_By, Last_Update, Last_Updated_By) VALUES (?,?,?,?,?,?,?,?,?)");
+        PreparedStatement ps = connection.prepareStatement("insert into customers (Customer_Name, Address, Postal_Code," +
+                "Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES (?,?,?,?,?,?,?,?,?)");
         ps.setString(1, customer.getCustomerName());
         ps.setString(2, customer.getCustomerAddress());
         ps.setString(3, customer.getCustomerPostalCode());
         ps.setString(4, customer.getCustomerPhone());
-        ps.setDate(5, customer.getCreateDate());
+        ps.setTimestamp(5, Timestamp.from(Instant.now()));
         ps.setString(6, customer.getCreatedBy());
-        ps.setDate(7, customer.getLastUpdate());
+        ps.setTimestamp(7, Timestamp.from(Instant.now()));
         ps.setString(8, customer.getLastUpdatedBy());
+        ps.setInt(9,customer.getDivisionID());
 
         ps.executeUpdate();
     }
@@ -82,9 +84,9 @@ public class CustomerDao {
         ps.setString(2, customer.getCustomerAddress());
         ps.setString(3, customer.getCustomerPostalCode());
         ps.setString(4, customer.getCustomerPhone());
-        ps.setDate(5, customer.getCreateDate());
+        ps.setString(5, customer.getCreateDate());
         ps.setString(6, customer.getCreatedBy());
-        ps.setDate(7, customer.getLastUpdate());
+        ps.setString(7, customer.getLastUpdate());
         ps.setString(8, customer.getLastUpdatedBy());
         ps.setInt(9, customer.getCustomerID());
 

@@ -36,7 +36,7 @@ public class FldDAO {
     public static FirstLevelDivision get(String division) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
-        String sqlStatement= "select * FROM first_level_divisions WHERE Divsion = '" + division +"'";
+        String sqlStatement= "select * FROM first_level_divisions WHERE Division = '" + division +"'";
         ResultSet result = statement.executeQuery(sqlStatement);
         FirstLevelDivision fldResult = new FirstLevelDivision();
         while (result.next()) {
