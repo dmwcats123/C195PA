@@ -8,6 +8,9 @@ import Models.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -16,6 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 
 public class AddCustomer {
     @FXML ComboBox<String> countryCombo;
@@ -34,14 +38,21 @@ public class AddCustomer {
         newCustomer.setCustomerAddress(addressField.getText());
         newCustomer.setCustomerPostalCode(postalCodeField.getText());
         newCustomer.setCustomerPhone(phoneNumberField.getText());
-        newCustomer.setCreateDate(TimeUtility.getCurrentUTCTimestamp());
+        newCustomer.setCreateDate(TimeUtility.localToUTCTime(LocalDateTime.now().toString()));
         newCustomer.setCreatedBy(Main.currentUser.getUsername());
-        newCustomer.setLastUpdate(TimeUtility.getCurrentUTCTimestamp());
+        newCustomer.setLastUpdate(TimeUtility.localToUTCTime(LocalDateTime.now().toString()));
         newCustomer.setLastUpdatedBy(Main.currentUser.getUsername());
         newCustomer.setDivisionID(FldDAO.get(fldCombo.getSelectionModel().getSelectedItem()).getDivisionID());
         CustomerDao.add(newCustomer);
         Stage currentStage= (Stage) fldCombo.getScene().getWindow();
         currentStage.close();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/ManageCustomers.fxml"));
+        Parent root1 = fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.show();
+
     }
 
     @FXML public void countryComboClicked() {

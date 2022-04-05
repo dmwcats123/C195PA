@@ -3,9 +3,13 @@ package Controllers;
 import DAO.CustomerDao;
 import Models.Customer;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class ManageCustomers {
     @FXML TableView<Customer> customerTableView;
@@ -41,7 +45,18 @@ public class ManageCustomers {
     }
     @FXML
     public void addCustomerClicked() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/AddCustomer.fxml"));
+            Parent root1 = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
 
+            Stage currentStage= (Stage) customerTableView.getScene().getWindow();
+            currentStage.close();
+        } catch (java.io.IOException exception) {
+            System.out.println("io exception");
+        }
     }
 
     @FXML
