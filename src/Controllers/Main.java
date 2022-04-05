@@ -66,6 +66,8 @@ public class Main extends Application implements Initializable {
             stage.setScene(new Scene(root1));
             stage.show();
             currentUser = UserDao.get(attemptedUsername);
+            Stage currentStage = (Stage) submit.getScene().getWindow();
+            currentStage.close();
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             ResourceBundle resourceBundle = ResourceBundle.getBundle("Resources/login", userLocale);

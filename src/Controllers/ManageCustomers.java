@@ -66,7 +66,8 @@ public class ManageCustomers {
     }
 
     @FXML
-    public void deleteCustomerClicked() {
-
+    public void deleteCustomerClicked() throws Exception {
+        CustomerDao.delete(customerTableView.getSelectionModel().getSelectedItem().getCustomerID());
+        customerTableView.setItems(CustomerDao.getAllCustomers());
     }
 }
