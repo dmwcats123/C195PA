@@ -11,6 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class AddAppointment {
@@ -73,6 +74,10 @@ public class AddAppointment {
         appointment.setCustomerID(Integer.valueOf(customerID.getText()));
         appointment.setUserID(Integer.valueOf(userID.getText()));
         appointment.setContactID(ContactDAO.get(contactCombo.getSelectionModel().getSelectedItem()).getContactID());
+        appointment.setCreatedBy(Main.currentUser.getUsername());
+        appointment.setLastUpdatedBy(Main.currentUser.getUsername());
+        appointment.setCreateDate(TimeUtility.localToUTCTime(LocalDateTime.now().toString()));
+        appointment.setLastUpdate(TimeUtility.localToUTCTime(LocalDateTime.now().toString()));
         AppointmentDao.add(appointment);
     }
 }

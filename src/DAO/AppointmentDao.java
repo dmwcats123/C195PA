@@ -1,5 +1,6 @@
 package DAO;
 
+import Helpers.TimeUtility;
 import Models.Appointment;
 import Models.Database;
 import javafx.collections.FXCollections;
@@ -47,7 +48,7 @@ public class AppointmentDao {
         while(result.next()){
             Appointment appointmentResult = new Appointment(result.getInt("Appointment_ID"), result.getString("Title"),
                     result.getString("Description"), result.getString("Location"), result.getString("Type"),
-                    result.getString("Start"), result.getString("End"),
+                    TimeUtility.utcToLocalTime(result.getString("Start")), TimeUtility.utcToLocalTime(result.getString("End")),
                     result.getString("Create_Date"), result.getString("Created_By"),
                     result.getString("Last_Update"), result.getString("Last_Updated_By"),
                     result.getInt("Customer_ID"), result.getInt("User_ID"), result.getInt("Contact_ID"));
