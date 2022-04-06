@@ -4,6 +4,7 @@ import Models.Appointment;
 import Models.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 import java.sql.*;
 
@@ -61,8 +62,17 @@ public class AppointmentDao {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
         String sqlStatement= "delete * FROM appointments where Appointment_ID = " + appointmentID;
-        statement.executeUpdate(sqlStatement);
-    }
+        if (statement.executeUpdate(sqlStatement) > 0 ) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Success");
+            alert.setContentText("The record was deleted");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Failure");
+            alert.setContentText("The record was not deleted");
+            alert.showAndWait();
+        }    }
 
     public static void add(Appointment appointment) throws Exception {
         Connection connection = Database.makeConnection();

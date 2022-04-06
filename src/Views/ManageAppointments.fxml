@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ManageAppointments">
+    <children>
+        <Button fx:id="addAppointment" layoutX="93.0" layoutY="29.0" mnemonicParsing="false" onAction="#addAppointmentClicked" text="Add Appointment" />
+        <Button fx:id="updateAppointment" layoutX="198.0" layoutY="29.0" mnemonicParsing="false" onAction="#updateAppointmentClicked" text="Update Selected Appointment" />
+        <Button fx:id="deleteAppointment" layoutX="369.0" layoutY="29.0" mnemonicParsing="false" onAction="#deleteAppointmentClicked" text="Delete Selected Appointment" />
+        <TableView fx:id="appointmentTableView" layoutY="94.0" prefHeight="709.0" prefWidth="1200.0">
+            <columns>
+                <TableColumn fx:id="appointmentIDCol" prefWidth="120.0" text="ID" />
+                <TableColumn fx:id="appointmentTitleCol" prefWidth="120.0" text="Title" />
+                <TableColumn fx:id="appointmentDescriptionCol" prefWidth="120.0" text="Description" />
+                <TableColumn fx:id="appointmentLocationCol" prefWidth="120.0" text="Location" />
+                <TableColumn fx:id="appointmentContactCol" prefWidth="120.0" text="Contact" />
+                <TableColumn fx:id="appointmentTypeCol" prefWidth="120.0" text="Type" />
+                <TableColumn fx:id="appointmentStartCol" prefWidth="120.0" text="Start" />
+                <TableColumn fx:id="appointmentEndCol" prefWidth="120.0" text="End" />
+                <TableColumn fx:id="appointmentCustomerID" prefWidth="120.0" text="Customer ID" />
+                <TableColumn fx:id="appointmentUserID" prefWidth="120.0" text="User ID" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
