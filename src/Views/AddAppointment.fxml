@@ -14,8 +14,8 @@
 
         <Button fx:id="submitButton" layoutX="250.0" layoutY="274.0" mnemonicParsing="false" onAction="#submitButtonClicked" text="Submit" />
       <DatePicker fx:id="date" layoutX="316.0" layoutY="55.0" promptText="Start Date" />
-      <ComboBox fx:id="startTime" layoutX="316.0" layoutY="89.0" prefWidth="150.0" promptText="Start Time" />
-      <ComboBox fx:id="endTime" layoutX="316.0" layoutY="158.0" prefWidth="150.0" promptText="End Time" />
+      <TextField fx:id="startTime" layoutX="316.0" layoutY="89.0" prefWidth="150.0" promptText="Start Time" />
+      <TextField fx:id="endTime" layoutX="316.0" layoutY="158.0" prefWidth="150.0" promptText="End Time" />
       <TextField fx:id="customerID" layoutX="317.0" layoutY="194.0" promptText="Customer ID" />
       <TextField fx:id="userID" layoutX="317.0" layoutY="228.0" promptText="User ID" />
     </children>
