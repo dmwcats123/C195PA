@@ -3,9 +3,13 @@ package Controllers;
 import DAO.AppointmentDao;
 import Models.Appointment;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class ManageAppointments {
     @FXML TableView<Appointment> appointmentTableView;
@@ -43,8 +47,19 @@ public class ManageAppointments {
 
     @FXML
     public void addAppointmentClicked() {
-
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/AddAppointment.fxml"));
+            Parent root1 = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+            Stage currentStage= (Stage) appointmentTableView.getScene().getWindow();
+            currentStage.close();
+        } catch (java.io.IOException exception) {
+            System.out.println("io exception");
+        }
     }
+
     @FXML
     public void updateAppointmentClicked() {
 

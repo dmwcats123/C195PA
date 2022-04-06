@@ -52,7 +52,6 @@ public class ManageCustomers {
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.show();
-
             Stage currentStage= (Stage) customerTableView.getScene().getWindow();
             currentStage.close();
         } catch (java.io.IOException exception) {
