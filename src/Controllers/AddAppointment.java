@@ -1,12 +1,17 @@
 package Controllers;
 
+import DAO.AppointmentDao;
+import DAO.ContactDAO;
 import Helpers.TimeUtility;
+import Models.Appointment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+
+import java.time.format.DateTimeFormatter;
 
 public class AddAppointment {
     @FXML TextField titleField;
@@ -22,8 +27,9 @@ public class AddAppointment {
     @FXML TextField userID;
 
     @FXML
-    public void initialize() {
+    public void initialize() throws Exception {
         populateTimeCombos();
+        populateContactCombo();
     }
 
     public void populateTimeCombos() {
@@ -48,6 +54,25 @@ public class AddAppointment {
         endTime.setItems(localTimes);
     }
 
-    public void submitButtonClicked() {
+    public void populateContactCombo() throws Exception {
+        contactCombo.setItems(ContactDAO.getAllContacts());
+    }
+
+    public void submitButtonClicked() throws Exception {
+        Appointment appointment = new Appointment();
+        appointment.setTitle(titleField.getText());
+        appointment.setDescription(descriptionField.getText());
+        appointment.setLocation(locationField.getText());
+        appointment.setType(typeField.getText());
+        String start = TimeUtility.localToUTCTime(date.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " "
+                + startTime.getSelectionModel().getSelectedItem(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        appointment.setStart(start);
+        String end = TimeUtility.localToUTCTime(date.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) +
+                " " + endTime.getSelectionModel().getSelectedItem(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        appointment.setEnd(end);
+        appointment.setCustomerID(Integer.valueOf(customerID.getText()));
+        appointment.setUserID(Integer.valueOf(userID.getText()));
+        appointment.setContactID(ContactDAO.get(contactCombo.getSelectionModel().getSelectedItem()).getContactID());
+        AppointmentDao.add(appointment);
     }
 }

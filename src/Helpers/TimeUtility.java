@@ -19,6 +19,13 @@ public class TimeUtility {
         return utczdt.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
+    public static String localToUTCTime(String time, DateTimeFormatter dateTimeFormatter) {
+        LocalDateTime ldt = LocalDateTime.parse(time, dateTimeFormatter);
+        ZonedDateTime zdt = ldt.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
+        ZonedDateTime utczdt = zdt.withZoneSameInstant(ZoneId.of("UTC"));
+        return utczdt.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+    }
+
     public static String utcToLocalTime(String time) {
         LocalDateTime ldt = LocalDateTime.parse(time, DateTimeFormatter.ofPattern(DATE_FORMAT));
         ZonedDateTime utczdt = ldt.atZone(ZoneId.of("UTC"));

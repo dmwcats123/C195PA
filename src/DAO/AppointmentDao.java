@@ -78,7 +78,7 @@ public class AppointmentDao {
     public static void add(Appointment appointment) throws Exception {
         Connection connection = Database.makeConnection();
         PreparedStatement ps = connection.prepareStatement("insert into appointments (Title, Description, Location," +
-                "Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By) VALUES (?,?,?,?,?,?,?,?,?,?)");
+                "Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
         ps.setString(1, appointment.getTitle());
         ps.setString(2, appointment.getDescription());
         ps.setString(3, appointment.getLocation());
@@ -89,6 +89,9 @@ public class AppointmentDao {
         ps.setString(8, appointment.getCreatedBy());
         ps.setString(9, appointment.getLastUpdate());
         ps.setString(10, appointment.getLastUpdatedBy());
+        ps.setInt(11, appointment.getCustomerID());
+        ps.setInt(12, appointment.getUserID());
+        ps.setInt(13, appointment.getContactID());
 
         ps.executeUpdate();
     }
