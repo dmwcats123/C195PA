@@ -66,7 +66,8 @@ public class ManageAppointments {
 
     }
     @FXML
-    public void deleteAppointmentClicked () {
-
+    public void deleteAppointmentClicked () throws Exception {
+        AppointmentDao.delete(appointmentTableView.getSelectionModel().getSelectedItem().getAppointmentID());
+        appointmentTableView.setItems(AppointmentDao.getAllAppointments());
     }
 }

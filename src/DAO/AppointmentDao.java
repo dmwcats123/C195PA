@@ -63,7 +63,7 @@ public class AppointmentDao {
     public static void delete(int appointmentID) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
-        String sqlStatement= "delete * FROM appointments where Appointment_ID = " + appointmentID;
+        String sqlStatement= "delete FROM appointments where Appointment_ID = " + appointmentID;
         if (statement.executeUpdate(sqlStatement) > 0 ) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Success");
@@ -74,7 +74,8 @@ public class AppointmentDao {
             alert.setHeaderText("Failure");
             alert.setContentText("The record was not deleted");
             alert.showAndWait();
-        }    }
+        }
+    }
 
     public static void add(Appointment appointment) throws Exception {
         Connection connection = Database.makeConnection();
