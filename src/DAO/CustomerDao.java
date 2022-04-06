@@ -90,8 +90,8 @@ public class CustomerDao {
 
     public static void update(Customer customer) throws Exception {
         Connection connection = Database.makeConnection();
-        PreparedStatement ps = connection.prepareStatement("update customers SET Customer_Name = ?, Customer_Address = ?, " +
-                "Postal_Code = ?, Phone = ?, Create_Date = ?, Created_By = ?, Last_Update = ?, Last_Updated_By = ? WHERE Customer_ID = ?");
+        PreparedStatement ps = connection.prepareStatement("update customers SET Customer_Name = ?, Address = ?, " +
+                "Postal_Code = ?, Phone = ?, Create_Date = ?, Created_By = ?, Last_Update = ?, Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?");
 
         ps.setString(1, customer.getCustomerName());
         ps.setString(2, customer.getCustomerAddress());
@@ -101,9 +101,10 @@ public class CustomerDao {
         ps.setString(6, customer.getCreatedBy());
         ps.setString(7, customer.getLastUpdate());
         ps.setString(8, customer.getLastUpdatedBy());
-        ps.setInt(9, customer.getCustomerID());
+        ps.setInt(9, customer.getDivisionID());
+        ps.setInt(10, customer.getCustomerID());
 
-        ps.executeUpdate();
+        int update = ps.executeUpdate();
         Database.closeConnection();
     }
 

@@ -5,6 +5,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UpdateCustomer">
     <children>
+        <TextField fx:id="idField" disable="true" layoutX="152.0" layoutY="14.0" promptText="ID" />
         <TextField fx:id="nameField" layoutX="151.0" layoutY="55.0" promptText="Name" />
         <TextField fx:id="addressField" layoutX="152.0" layoutY="89.0" promptText="Address" />
         <TextField fx:id="postalCodeField" layoutX="152.0" layoutY="123.0" promptText="Postal Code" />
