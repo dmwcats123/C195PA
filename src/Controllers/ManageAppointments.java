@@ -57,6 +57,7 @@ public class ManageAppointments {
             currentStage.close();
         } catch (java.io.IOException exception) {
             System.out.println("io exception");
+            exception.printStackTrace();
         }
     }
 

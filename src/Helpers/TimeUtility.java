@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 
 public class TimeUtility {
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String TIME_FORMAT = "HH:mm:ss";
+
+
     public TimeUtility() {}
 
     public static String localToUTCTime(String time) {
@@ -21,5 +24,12 @@ public class TimeUtility {
         ZonedDateTime utczdt = ldt.atZone(ZoneId.of("UTC"));
         ZonedDateTime zdt = utczdt.withZoneSameInstant(ZoneId.systemDefault());
         return zdt.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+    }
+
+    public static String estToLocalTime(String time) {
+        LocalDateTime ldt = LocalDateTime.parse(time, DateTimeFormatter.ofPattern(DATE_FORMAT));
+        ZonedDateTime estzdt = ldt.atZone(ZoneId.of("US/Eastern"));
+        ZonedDateTime zdt = estzdt.withZoneSameInstant(ZoneId.systemDefault());
+        return zdt.format(DateTimeFormatter.ofPattern(TIME_FORMAT));
     }
 }
