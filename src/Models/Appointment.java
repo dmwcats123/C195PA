@@ -16,6 +16,7 @@ public class Appointment {
     private int customerID;
     private int userID;
     private int contactID;
+    private String contact;
 
 
     public Appointment(){}
@@ -41,6 +42,10 @@ public class Appointment {
 
     public void setAppointmentID(int appointmentID) {
         this.appointmentID = appointmentID;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     public void setContactID(int contactID) {
@@ -149,5 +154,9 @@ public class Appointment {
 
     public String getType() {
         return type;
+    }
+
+    public String getContact() {
+        return contact;
     }
 }

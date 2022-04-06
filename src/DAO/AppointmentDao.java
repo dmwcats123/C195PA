@@ -51,6 +51,7 @@ public class AppointmentDao {
                     result.getString("Create_Date"), result.getString("Created_By"),
                     result.getString("Last_Update"), result.getString("Last_Updated_By"),
                     result.getInt("Customer_ID"), result.getInt("User_ID"), result.getInt("Contact_ID"));
+            appointmentResult.setContact(ContactDAO.get(appointmentResult.getContactID()).getContactName());
             allAppointments.add(appointmentResult);
 
         }
