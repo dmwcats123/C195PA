@@ -4,6 +4,9 @@ import DAO.AppointmentDao;
 import DAO.ContactDAO;
 import Helpers.TimeUtility;
 import Models.Appointment;
+import Models.Contact;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,7 +23,7 @@ public class AddAppointment {
     @FXML TextField titleField;
     @FXML TextField descriptionField;
     @FXML TextField locationField;
-    @FXML TextField phoneNumberField;
+
     @FXML ComboBox<String> contactCombo;
     @FXML TextField typeField;
     @FXML DatePicker date;
@@ -35,7 +38,11 @@ public class AddAppointment {
     }
 
     public void populateContactCombo() throws Exception {
-        contactCombo.setItems(ContactDAO.getAllContacts());
+        ObservableList<String> contactNames = FXCollections.observableArrayList();
+        for (Contact contact: ContactDAO.getAllContacts()) {
+            contactNames.add(contact.getContactName());
+        }
+        contactCombo.setItems(contactNames);
     }
 
     public void submitButtonClicked() throws Exception {

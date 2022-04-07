@@ -22,7 +22,7 @@ public class Appointment {
     public Appointment(){}
 
     public Appointment(int appointmentID, String title, String description, String location,
-                            String type, String start, String end, String createdBy, String CreateDate,
+                            String type, String start, String end, String createdBy, String createDate,
                             String lastUpdate, String lastUpdatedBy, int customerID, int userID, int contactID) {
         this.appointmentID = appointmentID;
         this.title = title;

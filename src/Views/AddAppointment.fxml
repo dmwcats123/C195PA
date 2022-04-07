@@ -8,7 +8,6 @@
         <TextField fx:id="titleField" layoutX="151.0" layoutY="55.0" promptText="Title" />
         <TextField fx:id="descriptionField" layoutX="152.0" layoutY="89.0" promptText="Description" />
         <TextField fx:id="locationField" layoutX="152.0" layoutY="123.0" promptText="Location" />
-        <TextField fx:id="phoneNumberField" layoutX="152.0" layoutY="158.0" promptText="Phone Number" />
         <ComboBox fx:id="contactCombo" layoutX="152.0" layoutY="194.0" prefWidth="150.0" promptText="Contact" />
         <TextField fx:id="typeField" layoutX="152.0" layoutY="158.0" promptText="Type" />
 

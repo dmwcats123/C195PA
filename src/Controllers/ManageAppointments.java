@@ -63,7 +63,23 @@ public class ManageAppointments {
 
     @FXML
     public void updateAppointmentClicked() {
-
+        try {
+            Appointment appointmentToUpdate = appointmentTableView.getSelectionModel().getSelectedItem();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/UpdateAppointment.fxml"));
+            Parent root1 = fxmlLoader.load();
+            Stage stage = new Stage();
+            UpdateAppointment updateAppointmentController = fxmlLoader.getController();
+            updateAppointmentController.initialize(appointmentToUpdate);
+            stage.setScene(new Scene(root1));
+            stage.show();
+            Stage currentStage= (Stage) appointmentTableView.getScene().getWindow();
+            currentStage.close();
+        } catch (java.io.IOException exception) {
+            System.out.println("io exception");
+            exception.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     public void deleteAppointmentClicked () throws Exception {

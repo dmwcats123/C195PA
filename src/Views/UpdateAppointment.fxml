@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UpdateAppointment">
+    <children>
+        <TextField fx:id="idField" editable="false" layoutX="151.0" layoutY="30.0" promptText="ID" />
+        <TextField fx:id="titleField" layoutX="151.0" layoutY="60.0" promptText="Title" />
+        <TextField fx:id="descriptionField" layoutX="152.0" layoutY="90.0" promptText="Description" />
+        <TextField fx:id="locationField" layoutX="152.0" layoutY="120.0" promptText="Location" />
+        <ComboBox fx:id="contactCombo" layoutX="152.0" layoutY="150.0" prefWidth="150.0" promptText="Contact" />
+        <TextField fx:id="typeField" layoutX="152.0" layoutY="180.0" promptText="Type" />
+
+        <Button fx:id="submitButton" layoutX="250.0" layoutY="274.0" mnemonicParsing="false" onAction="#submitButtonClicked" text="Submit" />
+        <DatePicker fx:id="date" layoutX="316.0" layoutY="30.0" promptText="Start Date" />
+        <TextField fx:id="startTime" layoutX="316.0" layoutY="60.0" prefWidth="150.0" promptText="Start Time" />
+        <TextField fx:id="endTime" layoutX="316.0" layoutY="90.0" prefWidth="150.0" promptText="End Time" />
+        <TextField fx:id="customerID" layoutX="317.0" layoutY="120.0" promptText="Customer ID" />
+        <TextField fx:id="userID" layoutX="317.0" layoutY="150.0" promptText="User ID" />
+    </children>
+</AnchorPane>

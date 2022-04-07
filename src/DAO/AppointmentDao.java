@@ -26,6 +26,7 @@ public class AppointmentDao {
             appointmentResult.setStart(result.getString("Start"));
             appointmentResult.setEnd(result.getString("End"));
             appointmentResult.setCreatedBy(result.getString("Created_By"));
+            appointmentResult.setCreateDate(result.getString("Create_Date"));
             appointmentResult.setLastUpdate(result.getString("Last_Update"));
             appointmentResult.setLastUpdatedBy(result.getString("Last_Updated_By"));
             appointmentResult.setCustomerID(result.getInt("Customer_ID"));
@@ -101,7 +102,7 @@ public class AppointmentDao {
     public static void update(Appointment appointment) throws Exception {
         Connection connection = Database.makeConnection();
         PreparedStatement ps = connection.prepareStatement("update appointments SET Title = ?, Description = ?, " +
-                "Location = ?, Type = ?, Start = ?, End = ?, Create_Date = ?, Created_By = ?, Last_Update = ?, Last_Updated_By = ? WHERE Appointment_ID = ?");
+                "Location = ?, Type = ?, Start = ?, End = ?, Create_Date = ?, Created_By = ?, Last_Update = ?, Last_Updated_By = ?, Contact_ID = ?, Customer_ID = ?, User_ID = ? WHERE Appointment_ID = ?");
 
         ps.setString(1, appointment.getTitle());
         ps.setString(2, appointment.getDescription());
@@ -113,7 +114,10 @@ public class AppointmentDao {
         ps.setString(8, appointment.getCreatedBy());
         ps.setString(9, appointment.getLastUpdate());
         ps.setString(10, appointment.getLastUpdatedBy());
-        ps.setInt(11, appointment.getAppointmentID());
+        ps.setInt(11, appointment.getContactID());
+        ps.setInt(12, appointment.getCustomerID());
+        ps.setInt(13, appointment.getUserID());
+        ps.setInt(14, appointment.getAppointmentID());
 
 
         ps.executeUpdate();
