@@ -6,8 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -23,7 +25,10 @@ public class ManageAppointments {
     @FXML TableColumn<Appointment, String> appointmentEndCol;
     @FXML TableColumn<Appointment, Integer> appointmentCustomerID;
     @FXML TableColumn<Appointment, Integer> appointmentUserID;
-
+    @FXML ToggleGroup apptSelection;
+    @FXML RadioButton monthlyRadio;
+    @FXML RadioButton weeklyRadio;
+    @FXML RadioButton allRadio;
 
     @FXML
     public void initialize() {
@@ -38,8 +43,7 @@ public class ManageAppointments {
             appointmentEndCol.setCellValueFactory(new PropertyValueFactory<Appointment, String>("end"));
             appointmentCustomerID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("customerID"));
             appointmentUserID.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("userID"));
-
-            appointmentTableView.setItems(AppointmentDao.getAllAppointments());
+            updateAppointmentTable();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -84,6 +88,16 @@ public class ManageAppointments {
     @FXML
     public void deleteAppointmentClicked () throws Exception {
         AppointmentDao.delete(appointmentTableView.getSelectionModel().getSelectedItem().getAppointmentID());
-        appointmentTableView.setItems(AppointmentDao.getAllAppointments());
+        updateAppointmentTable();
+    }
+
+    public void updateAppointmentTable () throws Exception {
+        if(weeklyRadio.isSelected()) {
+            appointmentTableView.setItems(AppointmentDao.getWeekAppointments());
+        } else if(monthlyRadio.isSelected()) {
+            appointmentTableView.setItems(AppointmentDao.getMonthAppointments());
+        } else if (allRadio.isSelected()) {
+            appointmentTableView.setItems(AppointmentDao.getAllAppointments());
+        }
     }
 }

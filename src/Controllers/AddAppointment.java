@@ -65,15 +65,22 @@ public class AddAppointment {
             appointment.setLastUpdatedBy(Main.currentUser.getUsername());
             appointment.setCreateDate(TimeUtility.localToUTCTime(LocalDateTime.now().toString()));
             appointment.setLastUpdate(TimeUtility.localToUTCTime(LocalDateTime.now().toString()));
-            AppointmentDao.add(appointment);
-            Stage currentStage= (Stage) startTime.getScene().getWindow();
-            currentStage.close();
+            if(TimeUtility.verifyAppointmentInBusinessHours(appointment)) {
+                AppointmentDao.add(appointment);
+                Stage currentStage= (Stage) startTime.getScene().getWindow();
+                currentStage.close();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/ManageAppointments.fxml"));
+                Parent root1 = fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root1));
+                stage.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Outside Business Hours!");
+                alert.setContentText("Appointment must be between 8am and 10pm eastern time.");
+                Optional<ButtonType> info = alert.showAndWait();
+            }
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/ManageAppointments.fxml"));
-            Parent root1 = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.show();
 
         } catch(DateTimeParseException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

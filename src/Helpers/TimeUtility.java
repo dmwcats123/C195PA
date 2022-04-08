@@ -1,5 +1,7 @@
 package Helpers;
 
+import Models.Appointment;
+
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -38,5 +40,20 @@ public class TimeUtility {
         ZonedDateTime estzdt = ldt.atZone(ZoneId.of("US/Eastern"));
         ZonedDateTime zdt = estzdt.withZoneSameInstant(ZoneId.systemDefault());
         return zdt.format(DateTimeFormatter.ofPattern(TIME_FORMAT));
+    }
+
+    public static boolean verifyAppointmentInBusinessHours(Appointment appointment) {
+        LocalDateTime apptStartLDT = LocalDateTime.parse(appointment.getStart(), DateTimeFormatter.ofPattern(DATE_FORMAT));
+        LocalDateTime apptEndLDT = LocalDateTime.parse(appointment.getEnd(), DateTimeFormatter.ofPattern(DATE_FORMAT));
+
+        ZonedDateTime apptStartUTCZDT = apptStartLDT.atZone(ZoneId.of("UTC"));
+        ZonedDateTime apptEndUTCZDT = apptEndLDT.atZone(ZoneId.of("UTC"));
+
+        ZonedDateTime apptStartESTZDT = apptStartUTCZDT.withZoneSameInstant(ZoneId.of("US/Eastern"));
+        ZonedDateTime apptEndESTZDT = apptEndUTCZDT.withZoneSameInstant(ZoneId.of("US/Eastern"));
+
+        int startHour = apptStartESTZDT.getHour();
+        int endHour = apptEndESTZDT.getHour();
+        return startHour >= 8 && endHour <= 22;
     }
 }

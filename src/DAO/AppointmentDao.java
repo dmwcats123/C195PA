@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class AppointmentDao {
 
@@ -53,12 +54,71 @@ public class AppointmentDao {
                     result.getString("Create_Date"), result.getString("Created_By"),
                     result.getString("Last_Update"), result.getString("Last_Updated_By"),
                     result.getInt("Customer_ID"), result.getInt("User_ID"), result.getInt("Contact_ID"));
-            appointmentResult.setContact(ContactDAO.get(appointmentResult.getContactID()).getContactName());
             allAppointments.add(appointmentResult);
 
         }
         Database.closeConnection();
         return allAppointments;
+    }
+
+    public static ObservableList<Appointment> getMonthAppointments () {
+        ObservableList<Appointment> monthlyAppts = FXCollections.observableArrayList();
+        Appointment appointment;
+        LocalDate now = LocalDate.now();
+        LocalDate oneMonth = LocalDate.now().plusMonths(1);
+        try {
+            Connection connection = Database.makeConnection();
+            Statement statement =  connection.createStatement();
+            String sqlStatement= "SELECT * FROM appointments WHERE start >= '" + now + "' AND start <= '" + oneMonth + "'\n" +
+                    "ORDER BY start";
+            ResultSet result = statement.executeQuery(sqlStatement);
+            while(result.next()) {
+                appointment = new Appointment(result.getInt("Appointment_ID"), result.getString("Title"),
+                        result.getString("Description"), result.getString("Location"), result.getString("Type"),
+                        TimeUtility.utcToLocalTime(result.getString("Start")), TimeUtility.utcToLocalTime(result.getString("End")),
+                        result.getString("Create_Date"), result.getString("Created_By"),
+                        result.getString("Last_Update"), result.getString("Last_Updated_By"),
+                        result.getInt("Customer_ID"), result.getInt("User_ID"), result.getInt("Contact_ID"));
+                monthlyAppts.add(appointment);
+            }
+            Database.closeConnection();
+            return monthlyAppts;
+        }
+        catch (Exception e) {
+            System.out.println("SQLException: " + e.getMessage());
+            return null;
+        }
+    }
+
+
+
+    public static ObservableList<Appointment> getWeekAppointments () {
+        ObservableList<Appointment> weekAppts = FXCollections.observableArrayList();
+        Appointment appointment;
+        LocalDate now = LocalDate.now();
+        LocalDate oneWeek = LocalDate.now().plusDays(7);
+        try {
+            Connection connection = Database.makeConnection();
+            Statement statement =  connection.createStatement();
+            String sqlStatement= "SELECT * FROM appointments WHERE start >= '" + now + "' AND start <= '" + oneWeek + "'\n" +
+                    "ORDER BY start";
+            ResultSet result = statement.executeQuery(sqlStatement);
+            while(result.next()) {
+                appointment = new Appointment(result.getInt("Appointment_ID"), result.getString("Title"),
+                        result.getString("Description"), result.getString("Location"), result.getString("Type"),
+                        TimeUtility.utcToLocalTime(result.getString("Start")), TimeUtility.utcToLocalTime(result.getString("End")),
+                        result.getString("Create_Date"), result.getString("Created_By"),
+                        result.getString("Last_Update"), result.getString("Last_Updated_By"),
+                        result.getInt("Customer_ID"), result.getInt("User_ID"), result.getInt("Contact_ID"));
+                weekAppts.add(appointment);
+            }
+            Database.closeConnection();
+            return weekAppts;
+        }
+        catch (Exception e) {
+            System.out.println("SQLException: " + e.getMessage());
+            return null;
+        }
     }
 
     public static void delete(int appointmentID) throws Exception {
@@ -98,6 +158,7 @@ public class AppointmentDao {
 
         ps.executeUpdate();
     }
+
 
     public static void update(Appointment appointment) throws Exception {
         Connection connection = Database.makeConnection();
