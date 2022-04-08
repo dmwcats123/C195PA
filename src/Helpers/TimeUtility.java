@@ -1,6 +1,8 @@
 package Helpers;
 
+import DAO.AppointmentDao;
 import Models.Appointment;
+import javafx.collections.ObservableList;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -55,5 +57,30 @@ public class TimeUtility {
         int startHour = apptStartESTZDT.getHour();
         int endHour = apptEndESTZDT.getHour();
         return startHour >= 8 && endHour <= 22;
+    }
+
+    public static boolean verifyCustomerAppointmentsDontOverlap(Appointment newAppointment) throws Exception {
+        ObservableList<Appointment> customerAppointments = AppointmentDao.getAllAppointmentsForCustomer(newAppointment.getCustomerID());
+        LocalDateTime newApptStartLDT = LocalDateTime.parse(newAppointment.getStart(), DateTimeFormatter.ofPattern(DATE_FORMAT));
+        LocalDateTime newApptEndLDT = LocalDateTime.parse(newAppointment.getEnd(), DateTimeFormatter.ofPattern(DATE_FORMAT));
+        ZonedDateTime newApptStartZDT = newApptStartLDT.atZone(ZoneId.of("UTC"));
+        ZonedDateTime newApptEndZDT = newApptEndLDT.atZone(ZoneId.of("UTC"));
+
+        for(Appointment currAppointment: customerAppointments) {
+            LocalDateTime currApptStartLDT = LocalDateTime.parse(currAppointment.getStart(), DateTimeFormatter.ofPattern(DATE_FORMAT));
+            LocalDateTime currApptEndLDT = LocalDateTime.parse(currAppointment.getStart(), DateTimeFormatter.ofPattern(DATE_FORMAT));
+            ZonedDateTime currApptStartZDT = currApptStartLDT.atZone(ZoneId.systemDefault());
+            ZonedDateTime currApptEndZDT = currApptEndLDT.atZone(ZoneId.systemDefault());
+            if (currApptStartZDT.isAfter(newApptStartZDT) && currApptStartZDT.isBefore(newApptEndZDT)) {
+                return false;
+            } else if (currApptEndZDT.isAfter(newApptStartZDT) && currApptEndZDT.isBefore(newApptEndZDT)) {
+                return false;
+            } else if (newApptStartZDT.isAfter(currApptStartZDT) && newApptStartZDT.isBefore(currApptEndZDT)) {
+                return false;
+            } else if (newApptEndZDT.isAfter(currApptStartZDT) && newApptEndZDT.isBefore(currApptEndZDT)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

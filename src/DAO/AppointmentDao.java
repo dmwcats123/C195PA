@@ -54,6 +54,28 @@ public class AppointmentDao {
                     result.getString("Create_Date"), result.getString("Created_By"),
                     result.getString("Last_Update"), result.getString("Last_Updated_By"),
                     result.getInt("Customer_ID"), result.getInt("User_ID"), result.getInt("Contact_ID"));
+            appointmentResult.setContact(ContactDAO.get(appointmentResult.getContactID()).getContactName());
+            allAppointments.add(appointmentResult);
+
+        }
+        Database.closeConnection();
+        return allAppointments;
+    }
+
+    public static ObservableList<Appointment> getAllAppointmentsForCustomer(int customerID) throws SQLException, Exception{
+        ObservableList<Appointment> allAppointments= FXCollections.observableArrayList();
+        Connection connection = Database.makeConnection();
+        Statement statement =  connection.createStatement();
+        String sqlStatement= "select * FROM appointments WHERE Customer_ID = " + customerID;
+        ResultSet result = statement.executeQuery(sqlStatement);
+        while(result.next()){
+            Appointment appointmentResult = new Appointment(result.getInt("Appointment_ID"), result.getString("Title"),
+                    result.getString("Description"), result.getString("Location"), result.getString("Type"),
+                    TimeUtility.utcToLocalTime(result.getString("Start")), TimeUtility.utcToLocalTime(result.getString("End")),
+                    result.getString("Create_Date"), result.getString("Created_By"),
+                    result.getString("Last_Update"), result.getString("Last_Updated_By"),
+                    result.getInt("Customer_ID"), result.getInt("User_ID"), result.getInt("Contact_ID"));
+            appointmentResult.setContact(ContactDAO.get(appointmentResult.getContactID()).getContactName());
             allAppointments.add(appointmentResult);
 
         }
@@ -63,7 +85,7 @@ public class AppointmentDao {
 
     public static ObservableList<Appointment> getMonthAppointments () {
         ObservableList<Appointment> monthlyAppts = FXCollections.observableArrayList();
-        Appointment appointment;
+        Appointment appointmentResult;
         LocalDate now = LocalDate.now();
         LocalDate oneMonth = LocalDate.now().plusMonths(1);
         try {
@@ -73,13 +95,14 @@ public class AppointmentDao {
                     "ORDER BY start";
             ResultSet result = statement.executeQuery(sqlStatement);
             while(result.next()) {
-                appointment = new Appointment(result.getInt("Appointment_ID"), result.getString("Title"),
+                appointmentResult = new Appointment(result.getInt("Appointment_ID"), result.getString("Title"),
                         result.getString("Description"), result.getString("Location"), result.getString("Type"),
                         TimeUtility.utcToLocalTime(result.getString("Start")), TimeUtility.utcToLocalTime(result.getString("End")),
                         result.getString("Create_Date"), result.getString("Created_By"),
                         result.getString("Last_Update"), result.getString("Last_Updated_By"),
                         result.getInt("Customer_ID"), result.getInt("User_ID"), result.getInt("Contact_ID"));
-                monthlyAppts.add(appointment);
+                appointmentResult.setContact(ContactDAO.get(appointmentResult.getContactID()).getContactName());
+                monthlyAppts.add(appointmentResult);
             }
             Database.closeConnection();
             return monthlyAppts;

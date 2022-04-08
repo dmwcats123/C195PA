@@ -65,7 +65,7 @@ public class AddAppointment {
             appointment.setLastUpdatedBy(Main.currentUser.getUsername());
             appointment.setCreateDate(TimeUtility.localToUTCTime(LocalDateTime.now().toString()));
             appointment.setLastUpdate(TimeUtility.localToUTCTime(LocalDateTime.now().toString()));
-            if(TimeUtility.verifyAppointmentInBusinessHours(appointment)) {
+            if(TimeUtility.verifyAppointmentInBusinessHours(appointment) && TimeUtility.verifyCustomerAppointmentsDontOverlap(appointment)) {
                 AppointmentDao.add(appointment);
                 Stage currentStage= (Stage) startTime.getScene().getWindow();
                 currentStage.close();
@@ -76,8 +76,8 @@ public class AddAppointment {
                 stage.show();
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("Outside Business Hours!");
-                alert.setContentText("Appointment must be between 8am and 10pm eastern time.");
+                alert.setHeaderText("That Time is Bad!");
+                alert.setContentText("Appointment must be between 8am and 10pm eastern time, and customers can't have overlapping appointments.");
                 Optional<ButtonType> info = alert.showAndWait();
             }
 
