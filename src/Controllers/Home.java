@@ -83,10 +83,14 @@ public class Home {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/Reports.fxml"));
         Parent root1 = fxmlLoader.load();
         Stage stage = new Stage();
+        Reports reportsController = fxmlLoader.getController();
+        reportsController.initialize();
         stage.setScene(new Scene(root1));
         stage.show();
         } catch (java.io.IOException exception) {
             System.out.println("io exception");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Reports">
+   <children>
+      <TextArea fx:id="apptTypeReport" layoutY="97.0" prefHeight="301.0" prefWidth="188.0" />
+      <TextArea layoutX="188.0" layoutY="32.0" prefHeight="368.0" prefWidth="188.0" />
+      <TextArea layoutX="376.0" layoutY="30.0" prefHeight="368.0" prefWidth="200.0" />
+      <Label layoutX="254.0" layoutY="14.0" text="Report 2" />
+      <Label layoutX="462.0" layoutY="14.0" text="Report 3" />
+      <Button layoutX="28.0" layoutY="8.0" mnemonicParsing="false" onAction="#generateReportOne" prefHeight="49.0" prefWidth="133.0" text="Count Appointments By Type For Month" wrapText="true" />
+      <ComboBox fx:id="monthCombo" layoutX="20.0" layoutY="64.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
