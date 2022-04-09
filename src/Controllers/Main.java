@@ -60,12 +60,12 @@ public class Main extends Application implements Initializable {
         String attemptedUsername = usernameField.getText();
         String attemptedPassword = passwordField.getText();
         if(UserDao.get(attemptedUsername) != null && UserDao.get(attemptedUsername).getPassword().equals(attemptedPassword)) {
+            currentUser = UserDao.get(attemptedUsername);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/Home.fxml"));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
             stage.show();
-            currentUser = UserDao.get(attemptedUsername);
             Stage currentStage = (Stage) submit.getScene().getWindow();
             currentStage.close();
         } else {
