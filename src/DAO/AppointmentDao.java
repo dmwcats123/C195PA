@@ -171,6 +171,32 @@ public class AppointmentDao {
     }
 
 
+    public static ObservableList<Appointment> getAppointmentsForContact(int contactID) {
+        ObservableList<Appointment> contactAppts = FXCollections.observableArrayList();
+        Appointment appointment;
+        try {
+            Connection connection = Database.makeConnection();
+            Statement statement =  connection.createStatement();
+            String sqlStatement= "SELECT * FROM appointments WHERE Contact_ID = " + contactID;
+            ResultSet result = statement.executeQuery(sqlStatement);
+            while(result.next()) {
+                appointment = new Appointment(result.getInt("Appointment_ID"), result.getString("Title"),
+                        result.getString("Description"), result.getString("Location"), result.getString("Type"),
+                        TimeUtility.utcToLocalTime(result.getString("Start")), TimeUtility.utcToLocalTime(result.getString("End")),
+                        result.getString("Create_Date"), result.getString("Created_By"),
+                        result.getString("Last_Update"), result.getString("Last_Updated_By"),
+                        result.getInt("Customer_ID"), result.getInt("User_ID"), result.getInt("Contact_ID"));
+                contactAppts.add(appointment);
+            }
+            Database.closeConnection();
+            return contactAppts;
+        }
+        catch (Exception e) {
+            System.out.println("SQLException: " + e.getMessage());
+            return null;
+        }
+    }
+
     public static void delete(int appointmentID) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();

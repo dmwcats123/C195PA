@@ -1,5 +1,9 @@
 package Controllers;
 
+import DAO.AppointmentDao;
+import DAO.ContactDAO;
+import Models.Appointment;
+import Models.Contact;
 import Models.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +19,7 @@ import java.util.HashMap;
 
 public class Reports {
     @FXML TextArea apptTypeReport;
+    @FXML TextArea contactScheduleReport;
     @FXML ComboBox<String> monthCombo;
 
     public void initialize() throws Exception {
@@ -45,6 +50,19 @@ public class Reports {
         connection.close();
 
         apptTypeReport.setText(appointmentType.toString());
+    }
+
+    @FXML
+    public void generateReportTwo() throws Exception {
+        StringBuffer contactReport = new StringBuffer();
+        for (Contact contact: ContactDAO.getAllContacts()) {
+            contactReport.append(contact.getContactName() + "\n");
+            for (Appointment appointment: AppointmentDao.getAppointmentsForContact(contact.getContactID())) {
+                contactReport.append("Appointment ID: " + appointment.getAppointmentID() + " Title: " + appointment.getTitle() + " Start: "
+                        + appointment.getStart() + " End: " + appointment.getEnd() + " Customer ID: " + appointment.getCustomerID() + "\n");
+            }
+        }
+        contactScheduleReport.setText(contactReport.toString());
     }
 
 
