@@ -11,6 +11,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * Manage customers controller is used for the manage customers view and controls the table of customer information and
+ * allowing access to add, update, and delete customer records.
+ */
 public class ManageCustomers {
     @FXML TableView<Customer> customerTableView;
     @FXML TableColumn<Customer,Integer> customerIDCol;

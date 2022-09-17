@@ -10,6 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * FldDAO is used to interact with first level divisions in the database
+ */
 public class FldDAO {
 
     /**

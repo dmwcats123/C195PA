@@ -13,6 +13,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * Manage appointments controller is used for the manage appointemnts view and controls the table of appointment information and
+ * allowing access to add, update, and delete appointment records.
+ */
 public class ManageAppointments {
     @FXML TableView<Appointment> appointmentTableView;
     @FXML TableColumn<Appointment, Integer> appointmentIDCol;

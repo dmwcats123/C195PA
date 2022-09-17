@@ -22,6 +22,10 @@ import java.util.Optional;
 
 import static Helpers.TimeUtility.utcToLocalTime;
 
+/**
+ * update appointment is the controller for the update appointment view and is used to update information about an
+ * appointment that already exists in the database
+ */
 public class UpdateAppointment {
     @FXML TextField idField;
     @FXML TextField titleField;

@@ -20,7 +20,8 @@ import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 /**
- * This is the controller used to create new appointments.
+ * This is the controller used to create new appointments and provides functionality to type in appointment information
+ * and add it to the database.
  */
 public class AddAppointment {
     @FXML TextField titleField;

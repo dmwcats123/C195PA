@@ -10,6 +10,9 @@ import javafx.scene.control.Alert;
 import java.sql.*;
 import java.time.LocalDate;
 
+/**
+ * AppointmentDao is used to interact with appointments in the database
+ */
 public class AppointmentDao {
 
     /**

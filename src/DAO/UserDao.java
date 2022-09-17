@@ -7,6 +7,9 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 
+/**
+ * UserDao is used to interact with users in the database
+ */
 public class UserDao {
 
     /**

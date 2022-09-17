@@ -22,6 +22,10 @@ import java.sql.Statement;
 import java.time.LocalDateTime;
 
 
+/**
+ * update customer is the controller for the update customer view and is used to update information about a customer
+ * that already exists in the database
+ */
 public class UpdateCustomer {
     @FXML ComboBox<String> countryCombo;
     @FXML ComboBox<String> fldCombo;

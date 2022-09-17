@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+/**
+ * CountryDao is used to interact with countries in the database
+ */
 public class CountryDao {
     /**
      * gets a country from the database with a specified country ID

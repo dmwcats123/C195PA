@@ -26,6 +26,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 
+/**
+ * Main Class acts an entry point for the program and is where users will login.
+ */
 public class Main extends Application implements Initializable {
     @FXML TextField usernameField;
     @FXML TextField passwordField;

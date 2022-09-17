@@ -23,6 +23,9 @@ import java.util.HashMap;
 
 import static java.time.LocalTime.now;
 
+/**
+ * Reports controller is used to generate reports within the reports view
+ */
 public class Reports {
     @FXML TextArea apptTypeReport;
     @FXML TextArea contactScheduleReport;

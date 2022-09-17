@@ -17,6 +17,10 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+/**
+ * Home screen is where users choose if they want to manage appointments, customers or reports. Only accessible after
+ * login
+ */
 public class Home {
 
     /**

@@ -22,6 +22,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 
+/**
+ * AddCustomer is used to control the add customer view and features functionality to type a customers information and
+ * add it to the database.
+ */
 public class AddCustomer {
     @FXML ComboBox<String> countryCombo;
     @FXML TextField nameField;

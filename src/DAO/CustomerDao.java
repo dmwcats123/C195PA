@@ -9,6 +9,9 @@ import javafx.scene.control.Alert;
 
 import java.sql.*;
 
+/**
+ * CustomerDao is used to interact with customers in the database
+ */
 public class CustomerDao {
 
     /**

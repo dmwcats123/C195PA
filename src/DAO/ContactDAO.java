@@ -10,6 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * ContactDao is used to interact with contacts in the database
+ */
 public class ContactDAO {
     /**
      * finds a contact in the database with a specific ID
