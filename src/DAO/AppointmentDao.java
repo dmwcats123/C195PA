@@ -12,6 +12,12 @@ import java.time.LocalDate;
 
 public class AppointmentDao {
 
+    /**
+     * Finds and returns an appointment from the database
+     * @param appointmentID is the paramater that is matched to the database
+     * @return the appointment with the given appointmentID
+     * @throws Exception
+     */
     public static Appointment get(int appointmentID) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
@@ -41,6 +47,12 @@ public class AppointmentDao {
         return null;
     }
 
+    /**
+     * retrives and returns all appointments from the database
+     * @return an observable list of all appointments in the database
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<Appointment> getAllAppointments() throws SQLException, Exception{
         ObservableList<Appointment> allAppointments= FXCollections.observableArrayList();
         Connection connection = Database.makeConnection();
@@ -62,6 +74,13 @@ public class AppointmentDao {
         return allAppointments;
     }
 
+    /**
+     * Finds all appointments from the database for a specific customer
+     * @param customerID the customer ID of the customer for which the appointments are found
+     * @return an observable list of the customers appointments
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<Appointment> getAllAppointmentsForCustomer(int customerID) throws SQLException, Exception{
         ObservableList<Appointment> allAppointments= FXCollections.observableArrayList();
         Connection connection = Database.makeConnection();
@@ -83,6 +102,10 @@ public class AppointmentDao {
         return allAppointments;
     }
 
+    /**
+     * gets all appointments for the next month.
+     * @return observable list of appointments in the next month.
+     */
     public static ObservableList<Appointment> getMonthAppointments () {
         ObservableList<Appointment> monthlyAppts = FXCollections.observableArrayList();
         Appointment appointmentResult;
@@ -114,7 +137,10 @@ public class AppointmentDao {
     }
 
 
-
+    /**
+     * gets all appointments for the next week.
+     * @return observable list of appointments in the next week.
+     */
     public static ObservableList<Appointment> getWeekAppointments () {
         ObservableList<Appointment> weekAppts = FXCollections.observableArrayList();
         Appointment appointment;
@@ -144,6 +170,11 @@ public class AppointmentDao {
         }
     }
 
+    /**
+     * finds all appointments for a specified user in the database
+     * @param userID the userid of the users appointments to be returned
+     * @return an observable list of appointments for the specified user
+     */
     public static ObservableList<Appointment> getAppointmentsForUser(int userID) {
         ObservableList<Appointment> userAppts = FXCollections.observableArrayList();
         Appointment appointment;
@@ -171,6 +202,11 @@ public class AppointmentDao {
     }
 
 
+    /**
+     * finds all appointments for a specified contact in the database
+     * @param contactID the contact id of the contact whose appointments are to be returned.
+     * @return an observable list of appointments for specified contact.
+     */
     public static ObservableList<Appointment> getAppointmentsForContact(int contactID) {
         ObservableList<Appointment> contactAppts = FXCollections.observableArrayList();
         Appointment appointment;
@@ -197,6 +233,11 @@ public class AppointmentDao {
         }
     }
 
+    /**
+     * deletes an appointment from the database
+     * @param appointmentID specifies the appointment to be deleted
+     * @throws Exception
+     */
     public static void delete(int appointmentID) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
@@ -214,6 +255,11 @@ public class AppointmentDao {
         }
     }
 
+    /**
+     * adds an appointment to the database
+     * @param appointment to be added to database
+     * @throws Exception
+     */
     public static void add(Appointment appointment) throws Exception {
         Connection connection = Database.makeConnection();
         PreparedStatement ps = connection.prepareStatement("insert into appointments (Title, Description, Location," +
@@ -235,7 +281,11 @@ public class AppointmentDao {
         ps.executeUpdate();
     }
 
-
+    /**
+     * updates an appointment with new information
+     * @param appointment to be updated
+     * @throws Exception
+     */
     public static void update(Appointment appointment) throws Exception {
         Connection connection = Database.makeConnection();
         PreparedStatement ps = connection.prepareStatement("update appointments SET Title = ?, Description = ?, " +

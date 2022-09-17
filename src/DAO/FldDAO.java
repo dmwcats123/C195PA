@@ -12,10 +12,16 @@ import java.sql.Statement;
 
 public class FldDAO {
 
-    public static FirstLevelDivision get(int fldDao) throws Exception {
+    /**
+     * finds a FLD in the database with a specified ID
+     * @param fldID the ID of the FLD to be retrieved
+     * @return the FLD/
+     * @throws Exception
+     */
+    public static FirstLevelDivision get(int fldID) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
-        String sqlStatement= "select * FROM first_level_divisions WHERE  Division_ID = " + fldDao;
+        String sqlStatement= "select * FROM first_level_divisions WHERE  Division_ID = " + fldID;
         ResultSet result = statement.executeQuery(sqlStatement);
         FirstLevelDivision fldResult = new FirstLevelDivision();
         while (result.next()) {
@@ -33,6 +39,12 @@ public class FldDAO {
         return null;
     }
 
+    /**
+     * retrieves an FLD from the database given an FLD name
+     * @param division the name of the FLD to be retrieved
+     * @return the FLD with the specified name
+     * @throws Exception
+     */
     public static FirstLevelDivision get(String division) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
@@ -54,6 +66,12 @@ public class FldDAO {
         return null;
     }
 
+    /**
+     * gets all first level divisions in the database
+     * @return observable list of all divisions in the database
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<FirstLevelDivision> getAllDivisions() throws SQLException, Exception{
         ObservableList<FirstLevelDivision> allDivisions = FXCollections.observableArrayList();
         Connection connection = Database.makeConnection();

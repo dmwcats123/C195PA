@@ -11,6 +11,12 @@ import java.sql.*;
 
 public class CustomerDao {
 
+    /**
+     * get a customer from the database with the specified customer ID
+     * @param customerID the customer ID of the customer to be retrieved from the database
+     * @return the customer with the specified customer ID
+     * @throws Exception
+     */
     public static Customer get(int customerID) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
@@ -34,6 +40,12 @@ public class CustomerDao {
         return null;
     }
 
+    /**
+     * retrieves all customers from the database
+     * @return an observablelist of all customers in the database.
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<Customer> getAllCustomers() throws SQLException, Exception{
         ObservableList<Customer> allCustomers= FXCollections.observableArrayList();
         Connection connection = Database.makeConnection();
@@ -52,6 +64,11 @@ public class CustomerDao {
         return allCustomers;
     }
 
+    /**
+     * deletes a customer from the database with a specified ID
+     * @param customerID the ID of the customer to be deleted.
+     * @throws Exception
+     */
     public static void delete(int customerID) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
@@ -70,6 +87,11 @@ public class CustomerDao {
          }
     }
 
+    /**
+     * adds a customer to the database
+     * @param customer the customer to be added to the database
+     * @throws Exception
+     */
     public static void add(Customer customer) throws Exception {
         Connection connection = Database.makeConnection();
         PreparedStatement ps = connection.prepareStatement("insert into customers (Customer_Name, Address, Postal_Code," +
@@ -88,6 +110,11 @@ public class CustomerDao {
         Database.closeConnection();
     }
 
+    /**
+     * updates a customer in the database with new information
+     * @param customer the customer to be updated.
+     * @throws Exception
+     */
     public static void update(Customer customer) throws Exception {
         Connection connection = Database.makeConnection();
         PreparedStatement ps = connection.prepareStatement("update customers SET Customer_Name = ?, Address = ?, " +

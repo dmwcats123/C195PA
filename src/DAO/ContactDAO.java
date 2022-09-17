@@ -11,6 +11,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ContactDAO {
+    /**
+     * finds a contact in the database with a specific ID
+     * @param contactID the contact id of the contact to retrieve
+     * @return contact with the specified contact ID.
+     * @throws Exception
+     */
     public static Contact get(int contactID) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
@@ -28,6 +34,12 @@ public class ContactDAO {
         return null;
     }
 
+    /**
+     * gets a contact given a specified contact name from the database
+     * @param contact the name of the contact to retrieve from the database
+     * @return the contact with the specified name
+     * @throws Exception
+     */
     public static Contact get(String contact) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
@@ -45,6 +57,12 @@ public class ContactDAO {
         return null;
     }
 
+    /**
+     * Gets all contacts in the database
+     * @return an observable list of all contacts in the database
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<Contact> getAllContacts() throws SQLException, Exception{
         ObservableList<Contact> allContacts = FXCollections.observableArrayList();
         Connection connection = Database.makeConnection();

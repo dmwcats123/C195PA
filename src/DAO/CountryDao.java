@@ -8,6 +8,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class CountryDao {
+    /**
+     * gets a country from the database with a specified country ID
+     * @param countryID the country ID of the country to be retrieved from the database
+     * @return a country with the specified country ID
+     * @throws Exception
+     */
     public static Country get(int countryID) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();

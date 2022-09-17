@@ -9,6 +9,12 @@ import java.sql.*;
 
 public class UserDao {
 
+    /**
+     * gets a user from the database with a specified user ID
+     * @param userID the userID of the user to be retrieved from the database
+     * @return the user with the specified ID
+     * @throws Exception
+     */
     public static User get(int userID) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
@@ -29,6 +35,12 @@ public class UserDao {
         return null;
     }
 
+    /**
+     * retrieves a user from the database with a specified username
+     * @param username the username of the user to be retrieved
+     * @return the user with the specified username
+     * @throws Exception
+     */
     public static User get(String username) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
@@ -50,6 +62,12 @@ public class UserDao {
         return null;
     }
 
+    /**
+     * retrieves all users from the database
+     * @return an observable list of all users in the database
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<User> getAllUsers() throws SQLException, Exception{
         ObservableList<User> allUsers= FXCollections.observableArrayList();
         Connection connection = Database.makeConnection();
@@ -67,6 +85,11 @@ public class UserDao {
         return allUsers;
     }
 
+    /**
+     * deletes a user with a specified userID from the database
+     * @param userID the userID of the user to be deleted
+     * @throws Exception
+     */
     public static void delete(int userID) throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
@@ -74,6 +97,11 @@ public class UserDao {
         statement.executeUpdate(sqlStatement);
     }
 
+    /**
+     * adds a user to the database
+     * @param user to be added to the database
+     * @throws Exception
+     */
     public static void add(User user) throws Exception {
         Connection connection = Database.makeConnection();
         PreparedStatement ps = connection.prepareStatement("insert into users (User_Name, Password, Create_Date, Created_By," +
@@ -88,6 +116,11 @@ public class UserDao {
         ps.executeUpdate();
     }
 
+    /**
+     * updates a user in the database with new information
+     * @param user the user to be updated
+     * @throws Exception
+     */
     public static void update(User user) throws Exception {
         Connection connection = Database.makeConnection();
         PreparedStatement ps = connection.prepareStatement("update users SET User_Name = ?, Password = ?, Create_Date = ?, Created_By = ?," +
