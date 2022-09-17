@@ -1,6 +1,7 @@
 package Controllers;
 
 import DAO.UserDao;
+import Helpers.TimeUtility;
 import Models.Database;
 import Models.User;
 import javafx.application.Application;
@@ -12,9 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Locale;
 import java.util.Optional;
@@ -60,6 +65,8 @@ public class Main extends Application implements Initializable {
         String attemptedUsername = usernameField.getText();
         String attemptedPassword = passwordField.getText();
         if(UserDao.get(attemptedUsername) != null && UserDao.get(attemptedUsername).getPassword().equals(attemptedPassword)) {
+            String loginTrackingText = "Login Attempt Success " + attemptedUsername + " " + TimeUtility.localToUTCTime(LocalDateTime.now().toString()) + "\n";
+            Files.write(Paths.get("./loginactivity.txt"), loginTrackingText.getBytes());
             currentUser = UserDao.get(attemptedUsername);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/Home.fxml"));
             Parent root1 = fxmlLoader.load();
@@ -69,6 +76,8 @@ public class Main extends Application implements Initializable {
             Stage currentStage = (Stage) submit.getScene().getWindow();
             currentStage.close();
         } else {
+            String loginTrackingText = "Login Attempt Failure " + attemptedUsername + " " + TimeUtility.localToUTCTime(LocalDateTime.now().toString()) + "\n";
+            Files.write(Paths.get("./loginactivity.txt"), loginTrackingText.getBytes());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             ResourceBundle resourceBundle = ResourceBundle.getBundle("Resources/login", userLocale);
             alert.setHeaderText(resourceBundle.getString("loginProblemAlertTitle"));
