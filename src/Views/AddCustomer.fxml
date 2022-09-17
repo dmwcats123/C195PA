@@ -9,7 +9,7 @@
       <TextField fx:id="addressField" layoutX="152.0" layoutY="89.0" promptText="Address" />
       <TextField fx:id="postalCodeField" layoutX="152.0" layoutY="123.0" promptText="Postal Code" />
       <TextField fx:id="phoneNumberField" layoutX="152.0" layoutY="158.0" promptText="Phone Number" />
-      <ComboBox fx:id="countryCombo" layoutX="152.0" layoutY="194.0" onAction="#countryComboClicked" prefWidth="150.0" promptText="Country" />
+      <ComboBox fx:id="countryCombo" layoutX="152.0" layoutY="194.0" prefWidth="150.0" promptText="Country" />
       <ComboBox fx:id="fldCombo" layoutX="152.0" layoutY="229.0" prefWidth="150.0" promptText="First Level Division" />
       <Button fx:id="submitButton" layoutX="250.0" layoutY="274.0" mnemonicParsing="false" onAction="#submitButtonClicked" text="Submit" />
 
