@@ -19,6 +19,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
+/**
+ * This is the controller used to create new appointments.
+ */
 public class AddAppointment {
     @FXML TextField titleField;
     @FXML TextField descriptionField;
@@ -32,11 +35,18 @@ public class AddAppointment {
     @FXML TextField customerID;
     @FXML TextField userID;
 
-    @FXML
-    public void initialize() throws Exception {
+    /**
+     * Initializes the controller
+     * @throws Exception
+     */
+    @FXML public void initialize() throws Exception {
         populateContactCombo();
     }
 
+    /**
+     * Populates the contact combobox with all contacts in database
+     * @throws Exception
+     */
     public void populateContactCombo() throws Exception {
         ObservableList<String> contactNames = FXCollections.observableArrayList();
         for (Contact contact: ContactDAO.getAllContacts()) {
@@ -45,6 +55,10 @@ public class AddAppointment {
         contactCombo.setItems(contactNames);
     }
 
+    /**
+     * Adds the appointment to the databse when submit is clicked
+     * @throws Exception
+     */
     public void submitButtonClicked() throws Exception {
         try {
             Appointment appointment = new Appointment();

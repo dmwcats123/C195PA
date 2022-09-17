@@ -35,10 +35,17 @@ public class Main extends Application implements Initializable {
     Locale userLocale = Locale.getDefault();
     private ZoneId userZoneId = ZoneId.systemDefault();;
 
+    /**
+     * acts as an entry point for the program
+     * @param args takes cmd line arguments
+     */
     public static void main(String[] args) { launch(args); }
 
-    @Override
-    public void start(Stage primaryStage) {
+    /**
+     * Opens the Main view for the program
+     * @param primaryStage is the javafx stage for the program
+     */
+    @Override public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("../Views/Main.fxml"));
             Scene scene = new Scene(root, 1000, 400);
@@ -49,8 +56,12 @@ public class Main extends Application implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    /**
+     * initializes the main program and determines what language to use
+     * @param url
+     * @param resourceBundle holds resources for launching the program in other languages
+     */
+    @Override public void initialize(URL url, ResourceBundle resourceBundle) {
         resourceBundle = ResourceBundle.getBundle("Resources/login", userLocale);
         usernameField.setPromptText(resourceBundle.getString("usernameField"));
         passwordField.setPromptText(resourceBundle.getString("passwordField"));
@@ -58,8 +69,11 @@ public class Main extends Application implements Initializable {
         zoneId.setText(userZoneId.getId());
     }
 
-    @FXML
-    public void submitClicked() throws Exception {
+    /**
+     * attempts to login when the submit is clicked. also tracks login activity
+     * @throws Exception
+     */
+    @FXML public void submitClicked() throws Exception {
         Connection connection = Database.makeConnection();
         Statement statement =  connection.createStatement();
         String attemptedUsername = usernameField.getText();

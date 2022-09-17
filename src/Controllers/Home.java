@@ -19,6 +19,10 @@ import java.util.Optional;
 
 public class Home {
 
+    /**
+     * initializes the home controller where users choose if they want to manage appointments, customers, or reports
+     * checks for user appointments in the next 15 minutes
+     */
     public void initialize() {
         ObservableList<Appointment> userAppointments =  AppointmentDao.getAppointmentsForUser(Main.currentUser.getUserID());
         LocalDateTime now = LocalDateTime.now();
@@ -50,8 +54,11 @@ public class Home {
             Optional<ButtonType> info = alert.showAndWait();
         }
     }
-    @FXML
-    public void manageCustomersClicked() {
+
+    /**
+     * launches the manage customers view/controller when manage customers is clicked
+     */
+    @FXML public void manageCustomersClicked() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/ManageCustomers.fxml"));
             Parent root1 = fxmlLoader.load();
@@ -64,8 +71,10 @@ public class Home {
 
     }
 
-    @FXML
-    public void manageAppointmentsClicked() {
+    /**
+     * launches the manage appointments view/controller when manage appointments is clicked
+     */
+    @FXML public void manageAppointmentsClicked() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/ManageAppointments.fxml"));
             Parent root1 = fxmlLoader.load();
@@ -77,8 +86,10 @@ public class Home {
         }
     }
 
-    @FXML
-    public void generateReportsClicked() {
+    /**
+     * launches the reports view/controller when generate reports is clicked
+     */
+    @FXML public void generateReportsClicked() {
         try {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/Reports.fxml"));
         Parent root1 = fxmlLoader.load();

@@ -32,6 +32,12 @@ public class UpdateCustomer {
     @FXML TextField idField;
     Customer customer = new Customer();
 
+    /**
+     * initalizes the update customer view/controller and sets the customer info fields to the customers original info.
+     * @param customerToUpdate is the customer that was selected when update customer was clicked on the manage customer
+     *                         screen
+     * @throws Exception
+     */
     @FXML public void initialize(Customer customerToUpdate) throws Exception {
         idField.setText(Integer.toString(customerToUpdate.getCustomerID()));
         nameField.setText(customerToUpdate.getCustomerName());
@@ -55,10 +61,17 @@ public class UpdateCustomer {
         fillCountryComboBox();
         fillFldComboBox();
     }
+
+    /**
+     * this updates the division combo box when the country combo box is selected
+     */
     @FXML public void countryComboClicked() {
         fillFldComboBox();
     }
 
+    /**
+     * populates the country combo box with all the countries in the database
+     */
     public void fillCountryComboBox() {
         ObservableList<String> countries = FXCollections.observableArrayList();
         try {
@@ -76,6 +89,9 @@ public class UpdateCustomer {
 
     }
 
+    /**
+     * populates the division combo box with the divisions within the selected country.
+     */
     public void fillFldComboBox() {
         ObservableList<String> fld = FXCollections.observableArrayList();
 
@@ -98,6 +114,11 @@ public class UpdateCustomer {
             System.out.println("Exception " + e);
         }
     }
+
+    /**
+     * Updates the customers info in the database when the submit button is clicked.
+     * @throws Exception
+     */
     @FXML
     public void submitButtonClicked() throws Exception {
         customer.setCustomerID(Integer.valueOf(idField.getText()));

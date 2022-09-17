@@ -30,8 +30,10 @@ public class ManageAppointments {
     @FXML RadioButton weeklyRadio;
     @FXML RadioButton allRadio;
 
-    @FXML
-    public void initialize() {
+    /**
+     * initalizes the Manage Appointments view/controller and sets values for the appointment table.
+     */
+    @FXML public void initialize() {
         try {
             appointmentIDCol.setCellValueFactory(new PropertyValueFactory<Appointment, Integer>("appointmentID"));
             appointmentTitleCol.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
@@ -49,8 +51,10 @@ public class ManageAppointments {
         }
     }
 
-    @FXML
-    public void addAppointmentClicked() {
+    /**
+     * Launches the view/controller to add new appointments when add appointment is clicked.
+     */
+    @FXML public void addAppointmentClicked() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/AddAppointment.fxml"));
             Parent root1 = fxmlLoader.load();
@@ -65,8 +69,10 @@ public class ManageAppointments {
         }
     }
 
-    @FXML
-    public void updateAppointmentClicked() {
+    /**
+     * Launches the view/controller to update appointments when update appointment is clicked.
+     */
+    @FXML public void updateAppointmentClicked() {
         try {
             Appointment appointmentToUpdate = appointmentTableView.getSelectionModel().getSelectedItem();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/UpdateAppointment.fxml"));
@@ -85,12 +91,21 @@ public class ManageAppointments {
             e.printStackTrace();
         }
     }
-    @FXML
-    public void deleteAppointmentClicked () throws Exception {
+
+    /**
+     * deletes the currently selected appointment from the appointment table
+     * @throws Exception
+     */
+    @FXML public void deleteAppointmentClicked () throws Exception {
         AppointmentDao.delete(appointmentTableView.getSelectionModel().getSelectedItem().getAppointmentID());
         updateAppointmentTable();
     }
 
+    /**
+     * helper method to set the appointments on the table when a new radio button is selected or an appointment is
+     * updated/changed
+     * @throws Exception
+     */
     public void updateAppointmentTable () throws Exception {
         if(weeklyRadio.isSelected()) {
             appointmentTableView.setItems(AppointmentDao.getWeekAppointments());

@@ -31,10 +31,17 @@ public class Reports {
     @FXML ComboBox<String> monthCombo;
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
+    /**
+     * initializes the generate report screen
+     * @throws Exception
+     */
     public void initialize() throws Exception {
     }
 
     @FXML
+    /**
+     * generates a report to count appointments in a given month
+     */
     public void generateReportOne() throws Exception {
         HashMap<String, String> dates = createDateMap();
         LocalDateTime startMonth = LocalDateTime.parse("2022-" + dates.get(monthCombo.getSelectionModel().getSelectedItem()) + "-01 00:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -60,8 +67,11 @@ public class Reports {
         apptTypeReport.setText(appointmentType.toString());
     }
 
-    @FXML
-    public void generateReportTwo() throws Exception {
+    /**
+     * generates a report to show all appointments for all contacts.
+     * @throws Exception
+     */
+    @FXML public void generateReportTwo() throws Exception {
         StringBuffer contactReport = new StringBuffer();
         for (Contact contact: ContactDAO.getAllContacts()) {
             contactReport.append(contact.getContactName() + ": \n");
@@ -80,8 +90,11 @@ public class Reports {
         contactScheduleReport.setText(contactReport.toString());
     }
 
-    @FXML
-    public void generateReportThree() throws Exception {
+    /**
+     * This generates my custom report which shows the next upcoming appointment for each customer.
+     * @throws Exception
+     */
+    @FXML public void generateReportThree() throws Exception {
         StringBuffer nextCustomerAppointment = new StringBuffer();
         for(Customer customer: CustomerDao.getAllCustomers()) {
             ObservableList<Appointment> customerAppointments = AppointmentDao.getAllAppointmentsForCustomer(customer.getCustomerID());

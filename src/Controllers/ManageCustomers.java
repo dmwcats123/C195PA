@@ -24,8 +24,11 @@ public class ManageCustomers {
     @FXML TableColumn<Customer,String> customerLastUpdatedByCol;
     @FXML TableColumn<Customer,String> customerDivisionCol;
 
-    @FXML
-    public void initialize() {
+
+    /**
+     * Initalizes the manage customers view/controller. Sets customer table values.
+     */
+    @FXML public void initialize() {
         try {
             customerIDCol.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customerID"));
             customerNameCol.setCellValueFactory(new PropertyValueFactory<Customer, String>("customerName"));
@@ -44,8 +47,10 @@ public class ManageCustomers {
         }
     }
 
-    @FXML
-    public void addCustomerClicked() {
+    /**
+     * Launches the add customer view when add customer is clicked
+     */
+    @FXML public void addCustomerClicked() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/AddCustomer.fxml"));
             Parent root1 = fxmlLoader.load();
@@ -59,8 +64,10 @@ public class ManageCustomers {
         }
     }
 
-    @FXML
-    public void updateCustomerClicked() {
+    /**
+     * Launches the update customer view when update customer is clicked
+     */
+    @FXML public void updateCustomerClicked() {
         try {
             Customer customerToUpdate = customerTableView.getSelectionModel().getSelectedItem();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/UpdateCustomer.fxml"));
@@ -79,8 +86,11 @@ public class ManageCustomers {
         }
     }
 
-    @FXML
-    public void deleteCustomerClicked() throws Exception {
+    /**
+     * deletes the currently selected customer from the table
+     * @throws Exception
+     */
+    @FXML public void deleteCustomerClicked() throws Exception {
         CustomerDao.delete(customerTableView.getSelectionModel().getSelectedItem().getCustomerID());
         customerTableView.setItems(CustomerDao.getAllCustomers());
     }

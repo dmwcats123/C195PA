@@ -30,6 +30,15 @@ public class AddCustomer {
     @FXML TextField phoneNumberField;
     @FXML ComboBox<String> fldCombo;
     @FXML Button submitButton;
+
+    /**
+     * Initializes the AddCustomer Controller.
+     * Lambda 1 creates a listener for countrycombobox and updates the first level division combo box with
+     * the appropriate divisions.
+     *
+     * Lambda 2 creates an event handler for the submit Button that creates the new customer when clicked
+     * and adds it to the databse
+     */
     public void initialize() {
         fillCountryComboBox();
         countryCombo.valueProperty().addListener((obs, oldVal, newVal) -> {
@@ -81,11 +90,10 @@ public class AddCustomer {
     });
     }
 
-    @FXML public void submitButtonClicked() throws Exception {
 
-    }
-
-
+    /**
+     * populates the country combo box with all the countries in the database
+     */
     public void fillCountryComboBox() {
         ObservableList<String> countries = FXCollections.observableArrayList();
         try {

@@ -36,7 +36,12 @@ public class UpdateAppointment {
     @FXML ComboBox<String> contactCombo;
     Appointment appointment = new Appointment();
 
-
+    /**
+     * initializes the update appointment controller/view and sets view values to the appointments original values.
+     * @param appointmentToUpdate is the appointment that as selected when update appointment was clicked on the
+     *                            home screen.
+     * @throws Exception
+     */
     @FXML public void initialize(Appointment appointmentToUpdate) throws Exception {
         appointmentToUpdate = AppointmentDao.get(appointmentToUpdate.getAppointmentID());
 
@@ -69,6 +74,10 @@ public class UpdateAppointment {
         populateContactCombo();
     }
 
+    /**
+     * populates the combo box to choose a contact with all contacts in the database
+     * @throws Exception
+     */
     public void populateContactCombo() throws Exception {
         ObservableList<String> contactNames = FXCollections.observableArrayList();
         for (Contact contact: ContactDAO.getAllContacts()) {
@@ -76,6 +85,10 @@ public class UpdateAppointment {
         }
         contactCombo.setItems(contactNames);    }
 
+    /**
+     * updates the customers information in the database when submit is clicked.
+     * @throws Exception
+     */
     public void submitButtonClicked() throws Exception {
         try {
             appointment.setAppointmentID(Integer.parseInt(idField.getText()));
