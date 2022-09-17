@@ -36,6 +36,7 @@ public class UpdateAppointment {
     @FXML ComboBox<String> contactCombo;
     Appointment appointment = new Appointment();
 
+
     @FXML public void initialize(Appointment appointmentToUpdate) throws Exception {
         appointmentToUpdate = AppointmentDao.get(appointmentToUpdate.getAppointmentID());
 
@@ -98,7 +99,7 @@ public class UpdateAppointment {
             appointment.setCreateDate(appointment.getCreateDate());
             appointment.setLastUpdate(TimeUtility.localToUTCTime(LocalDateTime.now().toString()));
 
-            if(TimeUtility.verifyAppointmentInBusinessHours(appointment) && TimeUtility.verifyCustomerAppointmentsDontOverlap(appointment)) {
+            if((TimeUtility.verifyAppointmentInBusinessHours(appointment) && TimeUtility.verifyCustomerAppointmentsDontOverlap(appointment))) {
                 AppointmentDao.update(appointment);
                 Stage currentStage= (Stage) startTime.getScene().getWindow();
                 currentStage.close();

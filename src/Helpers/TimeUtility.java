@@ -68,17 +68,20 @@ public class TimeUtility {
 
         for(Appointment currAppointment: customerAppointments) {
             LocalDateTime currApptStartLDT = LocalDateTime.parse(currAppointment.getStart(), DateTimeFormatter.ofPattern(DATE_FORMAT));
-            LocalDateTime currApptEndLDT = LocalDateTime.parse(currAppointment.getStart(), DateTimeFormatter.ofPattern(DATE_FORMAT));
-            ZonedDateTime currApptStartZDT = currApptStartLDT.atZone(ZoneId.systemDefault());
-            ZonedDateTime currApptEndZDT = currApptEndLDT.atZone(ZoneId.systemDefault());
-            if (currApptStartZDT.isAfter(newApptStartZDT) && currApptStartZDT.isBefore(newApptEndZDT)) {
-                return false;
-            } else if (currApptEndZDT.isAfter(newApptStartZDT) && currApptEndZDT.isBefore(newApptEndZDT)) {
-                return false;
-            } else if (newApptStartZDT.isAfter(currApptStartZDT) && newApptStartZDT.isBefore(currApptEndZDT)) {
-                return false;
-            } else if (newApptEndZDT.isAfter(currApptStartZDT) && newApptEndZDT.isBefore(currApptEndZDT)) {
-                return false;
+            LocalDateTime currApptEndLDT = LocalDateTime.parse(currAppointment.getEnd(), DateTimeFormatter.ofPattern(DATE_FORMAT));
+
+            ZonedDateTime currApptStartZDT = currApptStartLDT.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC"));
+            ZonedDateTime currApptEndZDT = currApptEndLDT.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC"));
+            if (currAppointment.getAppointmentID() != newAppointment.getAppointmentID()) {
+                if (currApptStartZDT.isAfter(newApptStartZDT) && currApptStartZDT.isBefore(newApptEndZDT)) {
+                    return false;
+                } else if (currApptEndZDT.isAfter(newApptStartZDT) && currApptEndZDT.isBefore(newApptEndZDT)) {
+                    return false;
+                } else if (newApptStartZDT.isAfter(currApptStartZDT) && newApptStartZDT.isBefore(currApptEndZDT)) {
+                    return false;
+                } else if (newApptEndZDT.isAfter(currApptStartZDT) && newApptEndZDT.isBefore(currApptEndZDT)) {
+                    return false;
+                }
             }
         }
         return true;
