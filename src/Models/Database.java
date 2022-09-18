@@ -14,7 +14,13 @@ public class Database {
     private static final String driver = "com.mysql.cj.jdbc.Driver";
     public static Connection conn;
 
-    //establishes connection to the database
+    /**
+     * creates the database connection
+     * @return information about the connection/server
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws Exception
+     */
     public static Connection makeConnection() throws ClassNotFoundException, SQLException, Exception{
         Class.forName(driver);
         conn = DriverManager.getConnection(DB_URL, username, password);
@@ -22,7 +28,10 @@ public class Database {
         return conn;
     }
 
-    //closes database connection
+    /**
+     * closes the database connection
+      * @throws SQLException
+     */
     public static void closeConnection() throws SQLException{
         conn.close();
         System.out.println("Connection closed.");

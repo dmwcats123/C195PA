@@ -9,6 +9,9 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * TimeUtility holds helper methods to convert between time zones and format times and dates
+ */
 public class TimeUtility {
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static final String TIME_FORMAT = "HH:mm:ss";
@@ -16,6 +19,11 @@ public class TimeUtility {
 
     public TimeUtility() {}
 
+    /**
+     * Converts a local time to a UTC time
+     * @param time a string representing a local time
+     * @return a string representing utc time
+     */
     public static String localToUTCTime(String time) {
         LocalDateTime ldt = LocalDateTime.parse(time);
         ZonedDateTime zdt = ldt.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
@@ -23,6 +31,12 @@ public class TimeUtility {
         return utczdt.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
+    /**
+     * converts a local time to a UTC time given a specified format
+     * @param time a string representing local time
+     * @param dateTimeFormatter the format of the local time
+     * @return the utc time
+     */
     public static String localToUTCTime(String time, DateTimeFormatter dateTimeFormatter) {
         LocalDateTime ldt = LocalDateTime.parse(time, dateTimeFormatter);
         ZonedDateTime zdt = ldt.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
@@ -30,6 +44,11 @@ public class TimeUtility {
         return utczdt.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
+    /**
+     * converts utc time to local time
+     * @param time a string representing utc time
+     * @return local time
+     */
     public static String utcToLocalTime(String time) {
         LocalDateTime ldt = LocalDateTime.parse(time, DateTimeFormatter.ofPattern(DATE_FORMAT));
         ZonedDateTime utczdt = ldt.atZone(ZoneId.of("UTC"));
@@ -37,13 +56,12 @@ public class TimeUtility {
         return zdt.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
-    public static String estToLocalTime(String time) {
-        LocalDateTime ldt = LocalDateTime.parse(time, DateTimeFormatter.ofPattern(DATE_FORMAT));
-        ZonedDateTime estzdt = ldt.atZone(ZoneId.of("US/Eastern"));
-        ZonedDateTime zdt = estzdt.withZoneSameInstant(ZoneId.systemDefault());
-        return zdt.format(DateTimeFormatter.ofPattern(TIME_FORMAT));
-    }
 
+    /**
+     * this verifies appointments are during business hours of 8am-10pm EST time
+     * @param appointment is the appointment to check time validity
+     * @return true if the appointment is during business hours, false if it is outside business hours.
+     */
     public static boolean verifyAppointmentInBusinessHours(Appointment appointment) {
         LocalDateTime apptStartLDT = LocalDateTime.parse(appointment.getStart(), DateTimeFormatter.ofPattern(DATE_FORMAT));
         LocalDateTime apptEndLDT = LocalDateTime.parse(appointment.getEnd(), DateTimeFormatter.ofPattern(DATE_FORMAT));
@@ -59,6 +77,12 @@ public class TimeUtility {
         return startHour >= 8 && endHour <= 22;
     }
 
+    /**
+     * veries that an appointment doesn't overlap with any other appointments for the same customer.
+     * @param newAppointment is the appointment to check for overlap
+     * @return true if appointments dont overlap, false if the appointment overlaps any other appointment for the customer.
+     * @throws Exception
+     */
     public static boolean verifyCustomerAppointmentsDontOverlap(Appointment newAppointment) throws Exception {
         ObservableList<Appointment> customerAppointments = AppointmentDao.getAllAppointmentsForCustomer(newAppointment.getCustomerID());
         LocalDateTime newApptStartLDT = LocalDateTime.parse(newAppointment.getStart(), DateTimeFormatter.ofPattern(DATE_FORMAT));
