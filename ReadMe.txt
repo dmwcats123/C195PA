@@ -2,7 +2,7 @@ Customer Appointment Database Application
     The progrma provides a UI to interact with a database of customers/users/appointments.
 
 Author: David Matthews Email: dmat104@wgu.edu
-
+Application Version: 1.0 Date: 9/18/2022
 IDE: IntelliJ 2021.1.3      JDK: Java SE 17.0.1         JavaFX Version: javafx-sdk-17.0.1
 
 Users must login to the program, then the user can choose to manage customers, appointments or reports by selecting

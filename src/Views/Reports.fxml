@@ -9,8 +9,9 @@
       <TextArea fx:id="contactScheduleReport" layoutX="188.0" layoutY="99.0" prefHeight="301.0" prefWidth="188.0" />
       <TextArea fx:id="nextCustApptReport" layoutX="376.0" layoutY="97.0" prefHeight="301.0" prefWidth="200.0" />
       <Button layoutX="28.0" layoutY="8.0" mnemonicParsing="false" onAction="#generateReportOne" prefHeight="49.0" prefWidth="133.0" text="Count Appointments By Type For Month" wrapText="true" />
-      <ComboBox fx:id="monthCombo" layoutX="20.0" layoutY="64.0" prefWidth="150.0" />
+      <ComboBox fx:id="monthCombo" layoutX="62.0" layoutY="64.0" prefHeight="25.0" prefWidth="108.0" />
       <Button layoutX="200.0" layoutY="45.0" mnemonicParsing="false" onAction="#generateReportTwo" text="Generate Contacts Schedule" />
       <Button fx:id="nextCustomerApptButton" layoutX="394.0" layoutY="26.0" mnemonicParsing="false" onAction="#generateReportThree" prefHeight="62.0" prefWidth="165.0" text="Generate Next Appointment For Each Customer" wrapText="true" />
+      <Label layoutX="21.0" layoutY="68.0" text="Month:" />
    </children>
 </AnchorPane>

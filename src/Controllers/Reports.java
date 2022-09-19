@@ -39,6 +39,20 @@ public class Reports {
      * @throws Exception
      */
     public void initialize() throws Exception {
+        ObservableList<String> months = FXCollections.observableArrayList();
+        months.add("January");
+        months.add("February");
+        months.add("March");
+        months.add("April");
+        months.add("May");
+        months.add("June");
+        months.add("July");
+        months.add("August");
+        months.add("September");
+        months.add("October");
+        months.add("November");
+        months.add("December");
+        monthCombo.setItems(months);
     }
 
     @FXML
