@@ -105,6 +105,8 @@ public class TimeUtility {
                     return false;
                 } else if (newApptEndZDT.isAfter(currApptStartZDT) && newApptEndZDT.isBefore(currApptEndZDT)) {
                     return false;
+                } else if (newApptEndZDT.isEqual(currApptEndZDT)) {
+                    return false;
                 }
             }
         }

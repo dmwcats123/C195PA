@@ -6,12 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 /**
  * Manage appointments controller is used for the manage appointemnts view and controls the table of appointment information and
@@ -101,7 +100,12 @@ public class ManageAppointments {
      * @throws Exception
      */
     @FXML public void deleteAppointmentClicked () throws Exception {
-        AppointmentDao.delete(appointmentTableView.getSelectionModel().getSelectedItem().getAppointmentID());
+        Appointment toDelete = appointmentTableView.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Appointment cancelled!");
+        alert.setContentText("ID: " + Integer.toString(toDelete.getAppointmentID()) + "Type: " + toDelete.getType());
+        Optional<ButtonType> info = alert.showAndWait();
+        AppointmentDao.delete(toDelete.getAppointmentID());
         updateAppointmentTable();
     }
 
